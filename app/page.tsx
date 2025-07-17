@@ -380,7 +380,7 @@ export default function AgrinemaFarmWebsite() {
                   alt="Agrinema Farm sustainable agriculture practices in Limpopo"
                   width={500}
                   height={300}
-                  className="rounded-2xl shadow-2xl max-h-[550px]"
+                  className="rounded-2xl shadow-2xl "
                 />
               </div>
               <div className="space-y-6">
