@@ -89,20 +89,21 @@ export default function AgrinemaFarmWebsite() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <a 
+        <Link 
           href="https://wa.me/27673470687" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 hover:shadow-green-500/50"
+          className="flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 hover:shadow-green-500/50 overflow-hidden"
         >
           <Image
             src="/icons8-whatsapp-50.png"
             alt="WhatsApp"
             width={56}
             height={56}
-            className="rounded-full"
+            className="rounded-full object-cover"
+            priority
           />
-        </a>
+        </Link>
       </motion.div>
 
       {/* Hero Section */}
