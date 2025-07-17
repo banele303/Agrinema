@@ -1153,15 +1153,22 @@ export default function AgrinemaFarmWebsite() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-green-400 text-green-400 hover:bg-green-400 hover:text-green-950 bg-transparent"
+                    className="border-green-400 text-green-400 hover:bg-green-400 hover:text-green-950 bg-transparent p-2"
                     asChild
                   >
                     <a 
                       href="https://wa.me/27673470687" 
                       target="_blank" 
                       rel="noopener noreferrer"
+                      className="flex items-center justify-center"
                     >
-                      WhatsApp
+                      <Image
+                        src="/icons8-whatsapp-50.png"
+                        alt="WhatsApp"
+                        width={24}
+                        height={24}
+                        className="rounded"
+                      />
                     </a>
                   </Button>
                 </div>
