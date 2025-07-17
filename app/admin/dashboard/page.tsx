@@ -201,6 +201,26 @@ export default function AdminDashboard() {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/jpg']
+      if (!allowedTypes.includes(file.type)) {
+        alert(`Invalid file type: ${file.type}. Please select a JPEG, PNG, WebP, or GIF image.`)
+        return
+      }
+      
+      // Validate file size (5MB limit for Vercel compatibility)
+      const maxSize = 5 * 1024 * 1024 // 5MB
+      if (file.size > maxSize) {
+        alert('File too large. Maximum size is 5MB for deployment compatibility.')
+        return
+      }
+      
+      console.log('Image selected:', {
+        name: file.name,
+        type: file.type,
+        size: file.size
+      })
+      
       setImageFile(file)
       const reader = new FileReader()
       reader.onload = (e) => {
@@ -210,21 +230,88 @@ export default function AdminDashboard() {
     }
   }
 
-  const uploadImage = async (file: File): Promise<string> => {
-    const formData = new FormData()
-    formData.append('file', file)
-    
-    const response = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData
+  const compressImage = (file: File, maxWidth: number = 1200, quality: number = 0.8): Promise<File> => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      const img = new globalThis.Image() // Use global Image constructor
+      
+      img.onload = () => {
+        // Calculate new dimensions
+        let { width, height } = img
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width
+          width = maxWidth
+        }
+        
+        canvas.width = width
+        canvas.height = height
+        
+        // Draw and compress
+        ctx?.drawImage(img, 0, 0, width, height)
+        
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              const compressedFile = new File([blob], file.name, {
+                type: file.type,
+                lastModified: Date.now()
+              })
+              resolve(compressedFile)
+            } else {
+              resolve(file) // Fallback to original
+            }
+          },
+          file.type,
+          quality
+        )
+      }
+      
+      img.onerror = () => resolve(file) // Fallback to original
+      img.src = URL.createObjectURL(file)
     })
-    
-    if (!response.ok) {
-      throw new Error('Failed to upload image')
+  }
+
+  const uploadImage = async (file: File): Promise<string> => {
+    try {
+      console.log('Original file:', {
+        name: file.name,
+        type: file.type,
+        size: file.size
+      })
+      
+      // Compress image for better upload success on Vercel
+      const compressedFile = await compressImage(file, 1200, 0.8)
+      
+      console.log('Compressed file:', {
+        name: compressedFile.name,
+        type: compressedFile.type,
+        size: compressedFile.size,
+        reduction: `${Math.round((1 - compressedFile.size / file.size) * 100)}%`
+      })
+      
+      const formData = new FormData()
+      formData.append('file', compressedFile)
+      
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      })
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        console.error('Upload response error:', errorData)
+        throw new Error(errorData.error || `Upload failed: ${response.status} ${response.statusText}`)
+      }
+      
+      const result = await response.json()
+      console.log('Upload successful:', result)
+      return result.url
+      
+    } catch (error) {
+      console.error('Upload error:', error)
+      throw new Error(error instanceof Error ? error.message : 'Failed to upload image')
     }
-    
-    const result = await response.json()
-    return result.url
   }
 
   const handleCreateProduct = async () => {
@@ -288,18 +375,33 @@ export default function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`/api/products?slug=${slug}`, {
+      console.log('Attempting to delete product:', slug)
+      
+      const response = await fetch(`/api/products?slug=${encodeURIComponent(slug)}`, {
         method: 'DELETE'
       })
 
       if (!response.ok) {
-        throw new Error('Failed to delete product')
+        const errorData = await response.json()
+        console.error('Delete response error:', errorData)
+        throw new Error(errorData.error || `Failed to delete product: ${response.status} ${response.statusText}`)
       }
 
+      const result = await response.json()
+      console.log('Product deleted successfully:', result)
+      
+      // Reload data after successful deletion
       await loadData()
+      
+      // Show success message
+      alert('Product deleted successfully!')
+      
     } catch (error) {
       console.error('Error deleting product:', error)
-      alert('Failed to delete product. Please try again.')
+      
+      // Show user-friendly error message
+      const errorMessage = error instanceof Error ? error.message : 'Failed to delete product'
+      alert(`Error: ${errorMessage}`)
     }
   }
 

@@ -104,7 +104,12 @@ export async function POST(request: NextRequest) {
     const locations: Location[] = JSON.parse(fs.readFileSync(LOCATIONS_FILE, 'utf8'))
     const location: Location = locations.find((loc: Location) => loc.id === body.locationId) || locations[0]
     
-    const slug = body.title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-')
+    const slug = body.title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
     const filename = `${slug}.md`
     const filePath = path.join(PRODUCTS_DIR, filename)
     
@@ -175,37 +180,83 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    console.log('DELETE request received')
     const { searchParams } = new URL(request.url)
     const slug = searchParams.get('slug')
     
+    console.log('Attempting to delete product with slug:', slug)
+    
     if (!slug) {
-      return NextResponse.json({ error: 'Slug is required' }, { status: 400 })
+      console.log('DELETE error: No slug provided')
+      return NextResponse.json({ error: 'Product slug is required' }, { status: 400 })
+    }
+    
+    // Ensure products directory exists
+    if (!fs.existsSync(PRODUCTS_DIR)) {
+      console.log('DELETE error: Products directory does not exist')
+      return NextResponse.json({ error: 'Products directory not found' }, { status: 404 })
     }
     
     const filePath = path.join(PRODUCTS_DIR, `${slug}.md`)
+    console.log('Checking file path:', filePath)
     
     if (!fs.existsSync(filePath)) {
+      console.log('DELETE error: Product file does not exist:', filePath)
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     }
     
-    // Read product to get location info
-    const fileContent = fs.readFileSync(filePath, 'utf8')
-    const { data: frontMatter } = matter(fileContent)
-    
-    // Delete the file
-    fs.unlinkSync(filePath)
-    
-    // Update location product count
-    const locations: Location[] = JSON.parse(fs.readFileSync(LOCATIONS_FILE, 'utf8'))
-    const location = locations.find((loc: Location) => loc.id === frontMatter.locationId)
-    if (location) {
-      location.products = Math.max((location.products || 0) - 1, 0)
-      fs.writeFileSync(LOCATIONS_FILE, JSON.stringify(locations, null, 2))
+    // Read product to get location info before deletion
+    let locationId = null
+    try {
+      const fileContent = fs.readFileSync(filePath, 'utf8')
+      const { data: frontMatter } = matter(fileContent)
+      locationId = frontMatter.locationId
+      console.log('Product locationId:', locationId)
+    } catch (readError) {
+      console.log('Error reading product file:', readError)
+      // Continue with deletion even if we can't read location info
     }
     
-    return NextResponse.json({ success: true })
+    // Delete the file
+    try {
+      fs.unlinkSync(filePath)
+      console.log('Successfully deleted product file:', filePath)
+    } catch (deleteError) {
+      console.error('Error deleting product file:', deleteError)
+      return NextResponse.json({ 
+        error: 'Failed to delete product file',
+        details: deleteError instanceof Error ? deleteError.message : 'Unknown error'
+      }, { status: 500 })
+    }
+    
+    // Update location product count if we have location info
+    if (locationId) {
+      try {
+        if (fs.existsSync(LOCATIONS_FILE)) {
+          const locationsData = fs.readFileSync(LOCATIONS_FILE, 'utf8')
+          const locations: Location[] = JSON.parse(locationsData)
+          
+          const location = locations.find((loc: Location) => loc.id === locationId)
+          if (location && location.products > 0) {
+            location.products = Math.max(location.products - 1, 0)
+            fs.writeFileSync(LOCATIONS_FILE, JSON.stringify(locations, null, 2))
+            console.log('Updated location product count for:', locationId)
+          }
+        }
+      } catch (locationError) {
+        console.log('Error updating location count:', locationError)
+        // Don't fail the deletion if location update fails
+      }
+    }
+    
+    console.log('Product deletion completed successfully')
+    return NextResponse.json({ message: 'Product deleted successfully', success: true })
+    
   } catch (error) {
-    console.error('Error deleting product:', error)
-    return NextResponse.json({ error: 'Failed to delete product' }, { status: 500 })
+    console.error('DELETE error:', error)
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 }
