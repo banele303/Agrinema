@@ -80,24 +80,6 @@ export default function ProductsPage() {
         gridCols="3"
       />
 
-      {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Link 
-          href="https://wa.me/27673470687" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 hover:shadow-green-500/50 overflow-hidden"
-        >
-          <img
-            src="/icons8-whatsapp-50.png"
-            alt="WhatsApp"
-            width={56}
-            height={56}
-            className="rounded-full object-cover"
-          />
-        </Link>
-      </div>
-
       {/* Call to Action */}
       <section className="py-16 bg-green-50 dark:bg-green-950/20">
         <div className="container mx-auto px-4 text-center">

@@ -31,18 +31,6 @@ export default function AboutPage() {
       {/* Navigation */}
       <Navbar />
 
-      {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <a 
-          href="https://wa.me/27673470687" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl transition-all duration-300 hover:shadow-green-500/50 hover:scale-110"
-        >
-          <MessageSquare className="w-6 h-6" />
-        </a>
-      </div>
-
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 pt-20">
         <div className="absolute inset-0 z-0">

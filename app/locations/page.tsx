@@ -119,7 +119,7 @@ export default function LocationsPage() {
       
       {/* Hero Section */}
       <motion.section 
-        className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-green-950 to-emerald-950 pt-20"
+        className="relative h-[80vh] flex items-center justify-center bg-gradient-to-br from-green-950 to-emerald-950 pt-20"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}

@@ -148,32 +148,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
       {/* Navigation */}
       <Navbar />
 
-      {/* WhatsApp Floating Button - Mobile Friendly */}
-      <motion.div 
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <Link 
-          href="https://wa.me/27673470687" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-2xl transition-all duration-300 hover:shadow-green-500/50 group"
-        >
-          <Image
-            src="/icons8-whatsapp-50.png"
-            alt="WhatsApp"
-            width={32}
-            height={32}
-            className="w-6 h-6 sm:w-8 sm:h-8 object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-200"
-            priority
-          />
-        </Link>
-      </motion.div>
-
       {/* Hero Section */}
       <motion.section 
         className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-green-950 to-emerald-950 pt-20"
@@ -663,7 +637,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 6 Strategic Locations Across Limpopo
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Strategically positioned farms ensuring fresh produce accessibility throughout Limpopo Province
+                Strategically positioned farms with detailed product availability, pricing, and seasonal schedules across Limpopo Province. Each location specializes in different crops to ensure year-round fresh produce supply.
               </p>
             </motion.div>
 
@@ -768,7 +742,9 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                               transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
                             >
                               <MapPin className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
-                              <p className="text-muted-foreground leading-relaxed text-sm">{location.address}</p>
+                              <div>
+                                <p className="text-muted-foreground leading-relaxed text-sm">{location.address}</p>
+                              </div>
                             </motion.div>
 
                             {/* Product List */}
@@ -780,31 +756,62 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.7 + index * 0.1, duration: 0.6 }}
                               >
-                                <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Available Products:</p>
+                                <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                  Available Products: 
+                                  <span className="ml-1 text-green-600 font-bold">
+                                    {availableProducts.length} ready now
+                                  </span>
+                                  {upcomingProducts.length > 0 && (
+                                    <span className="ml-2 text-orange-600 font-medium">
+                                      + {upcomingProducts.length} coming soon
+                                    </span>
+                                  )}
+                                </p>
                                 <div className="space-y-1 max-h-32 overflow-y-auto">
                                   {location.productAvailability.slice(0, 4).map((product, productIndex) => (
-                                    <div key={productIndex} className="flex items-center justify-between text-xs">
+                                    <div key={productIndex} className="flex items-center justify-between text-xs bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2">
                                       <div className="flex items-center gap-2">
                                         <span className="text-lg">{getCategoryIcon(product.category)}</span>
-                                        <span className="text-gray-600 dark:text-gray-400 truncate max-w-32">
-                                          {product.name}
-                                        </span>
+                                        <div className="flex flex-col">
+                                          <span className="text-gray-600 dark:text-gray-400 truncate max-w-32 font-medium">
+                                            {product.name}
+                                          </span>
+                                          {product.details?.area && (
+                                            <span className="text-xs text-gray-500 dark:text-gray-500">
+                                              {product.details.area}
+                                            </span>
+                                          )}
+                                          {product.availableDate && product.status === 'upcoming' && (
+                                            <span className="text-xs text-orange-600 dark:text-orange-400">
+                                              Available: {product.availableDate}
+                                            </span>
+                                          )}
+                                        </div>
                                       </div>
-                                      <Badge 
-                                        className={`text-xs px-2 py-0 ${
-                                          product.status === 'available'
-                                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                                            : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
-                                        }`}
-                                      >
-                                        {product.status === 'available' ? 'Now' : 'Soon'}
-                                      </Badge>
+                                      <div className="flex flex-col items-end gap-1">
+                                        <Badge 
+                                          className={`text-xs px-2 py-0 ${
+                                            product.status === 'available'
+                                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                                              : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
+                                          }`}
+                                        >
+                                          {product.status === 'available' ? 'Available' : 'Soon'}
+                                        </Badge>
+                                        {product.details?.price && (
+                                          <span className="text-xs text-green-600 font-bold">
+                                            {product.details.price}
+                                          </span>
+                                        )}
+                                      </div>
                                     </div>
                                   ))}
                                   {location.productAvailability.length > 4 && (
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-                                      +{location.productAvailability.length - 4} more...
-                                    </p>
+                                    <div className="text-center pt-2">
+                                      <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+                                        +{location.productAvailability.length - 4} more products available
+                                      </p>
+                                    </div>
                                   )}
                                 </div>
                               </motion.div>
