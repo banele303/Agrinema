@@ -37,7 +37,7 @@ export function FloatingActions() {
             alt="WhatsApp"
             width={24}
             height={24}
-            className="w-5 h-5 sm:w-6 sm:h-6 object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-200"
+            className="w-5 h-5 sm:w-6 sm:h-6 object-contain filter bg-green-700 invert group-hover:scale-110 transition-transform duration-200"
           />
           <span className="sr-only">WhatsApp</span>
         </Button>
