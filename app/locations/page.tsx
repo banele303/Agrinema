@@ -187,18 +187,6 @@ export default function LocationsPage() {
                   </Button>
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="/admin/dashboard" className="block w-full sm:w-auto">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-green-950 text-lg px-8 py-4 bg-transparent w-full sm:w-auto"
-                  >
-                    <User className="h-5 w-5 mr-2" />
-                    Admin Dashboard
-                  </Button>
-                </Link>
-              </motion.div>
             </motion.div>
           </div>
         </div>

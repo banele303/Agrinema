@@ -559,7 +559,6 @@ export default function AboutPage() {
                 <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
                 <div className="space-y-2 text-green-200">
                   <p>067 347 0687</p>
-                  <p>068 801 1545</p>
                   <p>Limpopo Province</p>
                   <p>South Africa</p>
                 </div>

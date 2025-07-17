@@ -406,10 +406,6 @@ export default function IcePage() {
                 <Phone className="h-5 w-5 mr-2" />
                 Call: 067 347 0687
               </Button>
-              <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50">
-                <Phone className="h-5 w-5 mr-2" />
-                Call: 068 801 1545
-              </Button>
             </div>
           </div>
         </div>
@@ -475,7 +471,6 @@ export default function IcePage() {
                 <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
                 <div className="space-y-2 text-green-200">
                   <p>067 347 0687</p>
-                  <p>068 801 1545</p>
                   <p>Limpopo Province</p>
                   <p>South Africa</p>
                 </div>

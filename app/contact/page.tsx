@@ -208,8 +208,7 @@ export default function ContactPage() {
                         <div>
                           <h3 className="font-semibold text-foreground mb-2">Phone Numbers</h3>
                           <div className="space-y-1">
-                            <p className="text-muted-foreground">Primary: 067 347 0687</p>
-                            <p className="text-muted-foreground">Secondary: 068 801 1545</p>
+                            <p className="text-muted-foreground">067 347 0687</p>
                           </div>
                           <p className="text-sm text-muted-foreground mt-2">Available 7 days a week, 8 AM - 6 PM</p>
                         </div>

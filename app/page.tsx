@@ -1413,7 +1413,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                     <div>
                       <h4 className="font-semibold text-lg">Phone Numbers</h4>
                       <p className="text-green-100">067 347 0687</p>
-                      <p className="text-green-100">068 801 1545</p>
                       <p className="text-sm text-green-200 mt-1">Available 7 days a week for orders and inquiries</p>
                     </div>
                   </div>
@@ -1547,7 +1546,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 <h4 className="font-semibold text-lg mb-4">Contact Info</h4>
                 <div className="space-y-2 text-green-200">
                   <p>067 347 0687</p>
-                  <p>068 801 1545</p>
                   <p>Limpopo Province</p>
                   <p>South Africa</p>
                 </div>
