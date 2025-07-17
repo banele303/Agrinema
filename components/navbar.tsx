@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Phone, ChevronDown, Menu, X, Leaf, Users, Package, MessageCircle, Home } from "lucide-react"
+import { Phone, ChevronDown, Menu, X, Leaf, Users, Package, MessageCircle, Home, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -35,6 +35,7 @@ export function Navbar() {
   const navItems = [
     { href: "/", label: "Home", icon: Home },
     { href: "/about", label: "About", icon: Users },
+    { href: "/locations", label: "Locations", icon: MapPin },
     { href: "/products", label: "Products", icon: Package, hasSubmenu: true },
     { href: "/blog", label: "Blog", icon: MessageCircle },
     { href: "/contact", label: "Contact", icon: Phone },
@@ -78,6 +79,14 @@ export function Navbar() {
                 }`}
               >
                 About
+              </Link>
+              <Link 
+                href="/locations" 
+                className={`font-medium transition-colors ${
+                  isActive("/locations") ? "text-green-600" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Locations
               </Link>
               
               {/* Products Dropdown */}

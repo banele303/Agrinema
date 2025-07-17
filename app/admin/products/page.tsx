@@ -61,10 +61,11 @@ const sampleProducts: Product[] = [
 ]
 
 export default function AdminProductsPage() {
-  const [products, setProducts] = useState<Product[]>(sampleProducts)
+  const [products, setProducts] = useState<Product[]>([])
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [message, setMessage] = useState("")
   const [newProduct, setNewProduct] = useState<Partial<Product>>({
     title: "",
@@ -76,45 +77,121 @@ export default function AdminProductsPage() {
     content: ""
   })
 
-  const handleSave = () => {
-    if (isCreating) {
-      const slug = newProduct.title?.toLowerCase().replace(/\s+/g, '-') || ""
-      const product: Product = {
-        slug,
-        title: newProduct.title || "",
-        price: newProduct.price || "",
-        availability: newProduct.availability || "In Stock",
-        image: newProduct.image || "",
-        featured: newProduct.featured || false,
-        category: newProduct.category || "vegetables",
-        content: newProduct.content || ""
+  useEffect(() => {
+    loadProducts()
+  }, [])
+
+  const loadProducts = async () => {
+    try {
+      setIsLoading(true)
+      const response = await fetch('/api/products')
+      if (response.ok) {
+        const data = await response.json()
+        setProducts(data)
+      } else {
+        console.error('Failed to load products')
+        setMessage("Failed to load products")
       }
-      setProducts([...products, product])
-      setMessage("Product created successfully!")
-      setIsCreating(false)
-      setNewProduct({
-        title: "",
-        price: "",
-        availability: "In Stock",
-        image: "",
-        featured: false,
-        category: "vegetables",
-        content: ""
-      })
+    } catch (error) {
+      console.error('Error loading products:', error)
+      setMessage("Error loading products")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleSave = async () => {
+    if (isCreating) {
+      try {
+        const slug = newProduct.title?.toLowerCase().replace(/\s+/g, '-') || ""
+        const product: Product = {
+          slug,
+          title: newProduct.title || "",
+          price: newProduct.price || "",
+          availability: newProduct.availability || "In Stock",
+          image: newProduct.image || "",
+          featured: newProduct.featured || false,
+          category: newProduct.category || "vegetables",
+          content: newProduct.content || ""
+        }
+        
+        const response = await fetch('/api/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(product),
+        })
+        
+        if (response.ok) {
+          await loadProducts() // Reload products from API
+          setMessage("Product created successfully!")
+          setIsCreating(false)
+          setNewProduct({
+            title: "",
+            price: "",
+            availability: "In Stock",
+            image: "",
+            featured: false,
+            category: "vegetables",
+            content: ""
+          })
+        } else {
+          const errorData = await response.json()
+          setMessage(`Error creating product: ${errorData.error || 'Unknown error'}`)
+        }
+      } catch (error) {
+        console.error('Create error:', error)
+        setMessage("Error creating product. Please try again.")
+      }
     } else if (selectedProduct) {
-      setProducts(products.map(p => p.slug === selectedProduct.slug ? selectedProduct : p))
-      setMessage("Product updated successfully!")
-      setIsEditing(false)
+      try {
+        const response = await fetch('/api/products', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(selectedProduct),
+        })
+        
+        if (response.ok) {
+          await loadProducts() // Reload products from API
+          setMessage("Product updated successfully!")
+          setIsEditing(false)
+        } else {
+          const errorData = await response.json()
+          setMessage(`Error updating product: ${errorData.error || 'Unknown error'}`)
+        }
+      } catch (error) {
+        console.error('Update error:', error)
+        setMessage("Error updating product. Please try again.")
+      }
     }
     setTimeout(() => setMessage(""), 3000)
   }
 
-  const handleDelete = (slug: string) => {
+  const handleDelete = async (slug: string) => {
     if (confirm("Are you sure you want to delete this product?")) {
-      setProducts(products.filter(p => p.slug !== slug))
-      setMessage("Product deleted successfully!")
-      setSelectedProduct(null)
-      setTimeout(() => setMessage(""), 3000)
+      try {
+        const response = await fetch(`/api/products?slug=${slug}`, {
+          method: 'DELETE',
+        })
+        
+        if (response.ok) {
+          await loadProducts() // Reload products from API
+          setMessage("Product deleted successfully!")
+          setSelectedProduct(null)
+          setTimeout(() => setMessage(""), 3000)
+        } else {
+          const errorData = await response.json()
+          setMessage(`Error deleting product: ${errorData.error || 'Unknown error'}`)
+          setTimeout(() => setMessage(""), 5000)
+        }
+      } catch (error) {
+        console.error('Delete error:', error)
+        setMessage("Error deleting product. Please try again.")
+        setTimeout(() => setMessage(""), 5000)
+      }
     }
   }
 
@@ -181,8 +258,16 @@ export default function AdminProductsPage() {
 
             <TabsContent value="products" className="space-y-6">
               {/* Products Grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.map((product) => (
+              {isLoading ? (
+                <div className="flex justify-center items-center py-12">
+                  <div className="text-center">
+                    <div className="w-8 h-8 border-4 border-green-200 border-t-green-600 rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-gray-600">Loading products...</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {products.map((product) => (
                   <motion.div key={product.slug} variants={cardVariants} initial="hidden" animate="visible">
                     <Card className="relative overflow-hidden border-2 hover:border-green-300 transition-colors">
                       {product.featured && (
@@ -245,7 +330,8 @@ export default function AdminProductsPage() {
                     </Card>
                   </motion.div>
                 ))}
-              </div>
+                </div>
+              )}
             </TabsContent>
 
             <TabsContent value="featured">
