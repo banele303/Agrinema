@@ -192,7 +192,7 @@ export default function LocationDetailPage() {
               <CardContent className="space-y-4">
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Manager</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{location.manager}</p>
+                
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Phone</p>

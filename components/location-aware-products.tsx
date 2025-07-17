@@ -23,7 +23,7 @@ const sampleLocations: Location[] = [
     name: "Limpopo Main Farm",
     address: "123 Farm Road, Polokwane, Limpopo",
     coordinates: { lat: -23.9045, lng: 29.4689 },
-    manager: "John Doe",
+   
     phone: "+27 11 123 4567",
     isActive: true,
     products: 45
@@ -33,7 +33,7 @@ const sampleLocations: Location[] = [
     name: "Tzaneen Branch",
     address: "456 Market Street, Tzaneen, Limpopo",
     coordinates: { lat: -23.8333, lng: 30.1667 },
-    manager: "Jane Smith",
+  
     phone: "+27 15 987 6543",
     isActive: true,
     products: 32
@@ -42,7 +42,7 @@ const sampleLocations: Location[] = [
     id: "loc3",
     name: "Mokopane Outlet",
     address: "789 Commerce Ave, Mokopane, Limpopo",
-    manager: "Mike Johnson",
+   
     phone: "+27 15 555 0123",
     isActive: true,
     products: 18

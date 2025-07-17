@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { MapPin, Phone, User, Package, Navigation, Clock, Tractor, Users, Calendar, Award, Leaf, Sprout, Loader2 } from "lucide-react"
-import { Location } from "@/types/product"
+import { Location, ProductAvailability } from "@/types/product"
 import Link from "next/link"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
@@ -413,6 +413,90 @@ export default function LocationsPage() {
                         </div>
                       </div>
                     </div>
+
+                    {/* Product Availability */}
+                    {location.productAvailability && location.productAvailability.length > 0 && (
+                      <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white mb-3">Product Availability</p>
+                        <div className="space-y-3">
+                          {location.productAvailability.map((product: ProductAvailability, index: number) => (
+                            <div key={index} className="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600">
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center space-x-2">
+                                  <div className={`w-2 h-2 rounded-full ${
+                                    product.status === 'available' 
+                                      ? 'bg-green-500 animate-pulse' 
+                                      : 'bg-orange-400'
+                                  }`}></div>
+                                  <span className="text-sm text-gray-900 dark:text-white font-medium">
+                                    {product.name}
+                                  </span>
+                                </div>
+                                <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                                  product.status === 'available'
+                                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                                    : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
+                                }`}>
+                                  {product.availableDate}
+                                </span>
+                              </div>
+                              
+                              {/* Enhanced Details */}
+                              {product.details && (
+                                <div className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
+                                  {product.details.area && (
+                                    <div className="flex items-center space-x-1">
+                                      <span className="font-medium">Area:</span>
+                                      <span>{product.details.area}</span>
+                                    </div>
+                                  )}
+                                  {product.details.plants && (
+                                    <div className="flex items-center space-x-1">
+                                      <span className="font-medium">Plants:</span>
+                                      <span>{product.details.plants}</span>
+                                    </div>
+                                  )}
+                                  {product.details.production && (
+                                    <div className="flex items-center space-x-1">
+                                      <span className="font-medium">Production:</span>
+                                      <span>{product.details.production}</span>
+                                    </div>
+                                  )}
+                                  {product.details.price && (
+                                    <div className="flex items-center space-x-1">
+                                      <span className="font-medium">Price:</span>
+                                      <span className="text-green-600 dark:text-green-400 font-medium">{product.details.price}</span>
+                                    </div>
+                                  )}
+                                  {product.details.stock && (
+                                    <div className="flex items-center space-x-1">
+                                      <span className="font-medium">Stock:</span>
+                                      <span>{product.details.stock}</span>
+                                    </div>
+                                  )}
+                                  {product.details.pricing && (
+                                    <div className="space-y-1">
+                                      <span className="font-medium">Pricing:</span>
+                                      {product.details.pricing.map((tier, tierIndex) => (
+                                        <div key={tierIndex} className="flex justify-between items-center text-xs">
+                                          <span>{tier.range}</span>
+                                          <span className="text-green-600 dark:text-green-400 font-medium">{tier.price}</span>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                  {product.details.description && (
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                      {product.details.description}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Coordinates */}
                     <div className="pt-4 border-t border-gray-200 dark:border-gray-700">

@@ -17,7 +17,19 @@ const DEFAULT_LOCATIONS_DATA = [
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
     products: 15,
-    isActive: true
+    isActive: true,
+    productAvailability: [
+      {
+        name: "Hubbard Green Squash",
+        status: "upcoming",
+        availableDate: "25th of September 2025",
+        category: "vegetables",
+        details: {
+          area: "1444m² (3.5 Ha)",
+          description: "Premium quality Hubbard Green Squash"
+        }
+      }
+    ]
   },
   {
     id: "bunzhe",
@@ -27,7 +39,21 @@ const DEFAULT_LOCATIONS_DATA = [
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
     products: 12,
-    isActive: true
+    isActive: true,
+    productAvailability: [
+      {
+        name: "4 weeks old chickens (Live)",
+        status: "upcoming",
+        availableDate: "18th of July 2025",
+        category: "poultry"
+      },
+      {
+        name: "Slaughtered Chickens",
+        status: "upcoming",
+        availableDate: "19th of July 2025",
+        category: "poultry"
+      }
+    ]
   },
   {
     id: "xigalo",
@@ -37,7 +63,65 @@ const DEFAULT_LOCATIONS_DATA = [
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
     products: 18,
-    isActive: true
+    isActive: true,
+    productAvailability: [
+      {
+        name: "Okra",
+        status: "available",
+        availableDate: "Available Now",
+        category: "vegetables",
+        details: {
+          area: "9917m²",
+          production: "±100 Crates a month",
+          price: "R200 per crate",
+          description: "Fresh okra currently selling"
+        }
+      },
+      {
+        name: "Potatoes",
+        status: "upcoming",
+        availableDate: "25th of July 2025",
+        category: "vegetables",
+        details: {
+          area: "3252m²",
+          plants: "4000 plants",
+          description: "Quality potatoes ready for harvest"
+        }
+      },
+      {
+        name: "Spinach",
+        status: "upcoming",
+        availableDate: "15th of August 2025",
+        category: "vegetables",
+        details: {
+          area: "5151m²",
+          plants: "12000 plants",
+          description: "Fresh spinach leaves"
+        }
+      },
+      {
+        name: "Onions",
+        status: "upcoming",
+        availableDate: "15th of September 2025",
+        category: "vegetables",
+        details: {
+          area: "2570m²",
+          plants: "25000 plants",
+          description: "Premium quality onions"
+        }
+      },
+      {
+        name: "Tomatoes",
+        status: "upcoming",
+        availableDate: "25th of August 2025",
+        category: "vegetables",
+        details: {
+          area: "953m²",
+          plants: "950 plants",
+          description: "Fresh red tomatoes"
+        }
+      }
+    ]
   },
   {
     id: "makasa",
@@ -57,7 +141,30 @@ const DEFAULT_LOCATIONS_DATA = [
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
     products: 16,
-    isActive: true
+    isActive: true,
+    productAvailability: [
+      {
+        name: "Ice Cubes",
+        status: "available",
+        availableDate: "Available Now",
+        category: "ice",
+        details: {
+          stock: "4213 bags",
+          pricing: [
+            { range: "1-50 bags", price: "R17 each" },
+            { range: "50-100 bags", price: "R12 each" },
+            { range: "100+ bags", price: "R10 each" }
+          ],
+          description: "Premium quality ice cubes with volume pricing"
+        }
+      },
+      {
+        name: "Butternut",
+        status: "upcoming",
+        availableDate: "14th of September 2025",
+        category: "vegetables"
+      }
+    ]
   },
   {
     id: "vhudimbilu",

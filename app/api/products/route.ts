@@ -59,7 +59,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Tshamutilikwa Farm",
     address: "Next to soccer ground, Tshamutilikwa, Limpopo",
     coordinates: { lat: -23.0123, lng: 29.4567 },
-    manager: "John Makhanya",
+    
     phone: "+27 83 123 4567",
     isActive: true,
     products: 1
@@ -69,7 +69,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Bunzhe Farm",
     address: "Next to JP Tshikalange Primary School, Bunzhe, Limpopo",
     coordinates: { lat: -23.1234, lng: 29.5678 },
-    manager: "Sarah Ndlovu",
+   
     phone: "+27 84 567 8901",
     isActive: true,
     products: 1
@@ -79,7 +79,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Xigalo Farm",
     address: "Next to Cheapside and Balow Lodge, Xigalo, Limpopo",
     coordinates: { lat: -23.2345, lng: 29.6789 },
-    manager: "David Thompson",
+   
     phone: "+27 82 345 6789",
     isActive: true,
     products: 1
@@ -89,7 +89,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Makasa Farm",
     address: "Makasa Village, Limpopo",
     coordinates: { lat: -23.3456, lng: 29.7890 },
-    manager: "Thandiwe Mthembu",
+  
     phone: "+27 81 234 5678",
     isActive: true,
     products: 0
@@ -99,7 +99,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Tshivhulani Farm",
     address: "Next to Cabal Villa, Tshivhulani, Limpopo",
     coordinates: { lat: -23.4567, lng: 29.8901 },
-    manager: "Mpho Lebese",
+  
     phone: "+27 83 456 7890",
     isActive: true,
     products: 0
@@ -109,7 +109,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Vhudimbilu Farm",
     address: "Vhudimbilu Village, Limpopo",
     coordinates: { lat: -23.5678, lng: 29.9012 },
-    manager: "Nomsa Maseko",
+ 
     phone: "+27 84 678 9012",
     isActive: true,
     products: 0

@@ -1322,13 +1322,32 @@ export default function AdminDashboard() {
                                 <span>{location.address}</span>
                               </div>
                               <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
-                                <Users className="h-4 w-4" />
-                                <span>Manager: {location.manager}</span>
-                              </div>
-                              <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                                 <Package className="h-4 w-4" />
                                 <span>Products: {location.products}</span>
                               </div>
+                              {location.productAvailability && location.productAvailability.length > 0 && (
+                                <div className="mt-3">
+                                  <p className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">Product Availability:</p>
+                                  <div className="space-y-1">
+                                    {location.productAvailability.slice(0, 3).map((product, idx) => (
+                                      <div key={idx} className="flex items-center justify-between text-xs">
+                                        <span className="text-gray-600 dark:text-gray-400">{product.name}</span>
+                                        <Badge 
+                                          variant={product.status === 'available' ? 'default' : 'secondary'}
+                                          className="text-xs"
+                                        >
+                                          {product.status === 'available' ? 'Available' : 'Upcoming'}
+                                        </Badge>
+                                      </div>
+                                    ))}
+                                    {location.productAvailability.length > 3 && (
+                                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                                        +{location.productAvailability.length - 3} more
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
                             </div>
 
                             <div className="flex gap-2 pt-2">
@@ -1337,14 +1356,14 @@ export default function AdminDashboard() {
                                 variant="outline"
                                 onClick={() => {
                                   setSelectedLocation(location)
-                                  setLocationFormData({
-                                    name: location.name,
-                                    address: location.address,
-                                    manager: location.manager,
-                                    phone: location.phone,
-                                    coordinates: location.coordinates || { lat: 0, lng: 0 },
-                                    isActive: location.isActive
-                                  })
+                                setLocationFormData({
+                                  name: location.name,
+                                  address: location.address,
+                                  manager: "",
+                                  phone: location.phone,
+                                  coordinates: location.coordinates || { lat: 0, lng: 0 },
+                                  isActive: location.isActive
+                                })
                                   setIsLocationModalOpen(true)
                                 }}
                                 className="flex-1"

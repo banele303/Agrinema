@@ -6,7 +6,7 @@ export const sampleLocations: Location[] = [
     name: "Agrinema Main Farm",
     address: "123 Farm Road, Rural District, Eastern Cape",
     coordinates: { lat: -33.0123, lng: 27.4567 },
-    manager: "John Makhanya",
+   
     phone: "+27 83 123 4567",
     isActive: true,
     products: 2
@@ -16,7 +16,7 @@ export const sampleLocations: Location[] = [
     name: "Agrinema North Farm",
     address: "456 Valley View, Northern District, Eastern Cape",
     coordinates: { lat: -32.8901, lng: 27.6789 },
-    manager: "Sarah Ndlovu",
+   
     phone: "+27 84 567 8901",
     isActive: true,
     products: 1
@@ -26,7 +26,7 @@ export const sampleLocations: Location[] = [
     name: "Agrinema Coastal Farm", 
     address: "789 Coastal Road, Port Elizabeth, Eastern Cape",
     coordinates: { lat: -33.9608, lng: 25.6022 },
-    manager: "David Thompson",
+
     phone: "+27 82 345 6789",
     isActive: true,
     products: 1

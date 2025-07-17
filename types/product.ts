@@ -30,10 +30,30 @@ export interface Location {
     lat: number;
     lng: number;
   };
-  manager: string;
   phone: string;
+  email?: string;
   isActive: boolean;
   products: number;
+  productAvailability?: ProductAvailability[];
+}
+
+export interface ProductAvailability {
+  name: string;
+  status: 'available' | 'upcoming';
+  availableDate: string;
+  category: 'vegetables' | 'poultry' | 'ice' | 'other';
+  details?: {
+    area?: string;
+    plants?: string;
+    production?: string;
+    price?: string;
+    stock?: string;
+    pricing?: Array<{
+      range: string;
+      price: string;
+    }>;
+    description?: string;
+  };
 }
 
 export interface Order {
