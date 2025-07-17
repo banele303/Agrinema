@@ -378,9 +378,9 @@ export default function AgrinemaFarmWebsite() {
                 <Image
                   src="/greanpaper.jpeg"
                   alt="Agrinema Farm sustainable agriculture practices in Limpopo"
-                  width={500}
-                  height={300}
-                  className="rounded-2xl shadow-2xl "
+                  width={400}
+                  height={280}
+                  className="rounded-2xl shadow-2xl object-cover"
                 />
               </div>
               <div className="space-y-6">
