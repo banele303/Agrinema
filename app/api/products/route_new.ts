@@ -15,7 +15,7 @@ const DEFAULT_PRODUCTS_DATA: any[] = [
     featured: true,
     image: "/tomato-hero.jpg",
     content: "Premium organic tomatoes grown in our state-of-the-art greenhouses. These juicy, vine-ripened tomatoes are perfect for salads, cooking, and preserving.",
-    location: { id: "tshamutilikwa", name: "Tshamutilikwa Farm" },
+    location: { id: "agrinema-main", name: "Agrinema Main Farm" },
     stock: 150,
     orders: 23,
     createdAt: "2024-01-15T08:00:00Z",
@@ -30,7 +30,7 @@ const DEFAULT_PRODUCTS_DATA: any[] = [
     featured: true,
     image: "/IMG_6092.jpg",
     content: "Fresh free-range eggs from our happy, healthy chickens. Our hens roam freely in spacious pastures, producing eggs with rich, golden yolks.",
-    location: { id: "bunzhe", name: "Bunzhe Farm" },
+    location: { id: "agrinema-north", name: "Agrinema North Farm" },
     stock: 80,
     orders: 34,
     createdAt: "2024-02-10T07:30:00Z",
@@ -45,7 +45,7 @@ const DEFAULT_PRODUCTS_DATA: any[] = [
     featured: true,
     image: "/iceblock3.jpg",
     content: "Crystal clear premium ice blocks perfect for keeping your products fresh and beverages cold.",
-    location: { id: "xigalo", name: "Xigalo Farm" },
+    location: { id: "agrinema-main", name: "Agrinema Main Farm" },
     stock: 200,
     orders: 45,
     createdAt: "2024-06-01T06:00:00Z",
@@ -55,62 +55,32 @@ const DEFAULT_PRODUCTS_DATA: any[] = [
 
 const DEFAULT_LOCATIONS_DATA: Location[] = [
   {
-    id: "tshamutilikwa",
-    name: "Tshamutilikwa Farm",
-    address: "Next to soccer ground, Tshamutilikwa, Limpopo",
-    coordinates: { lat: -23.0123, lng: 29.4567 },
+    id: "agrinema-main",
+    name: "Agrinema Main Farm",
+    address: "123 Farm Road, Rural District, Eastern Cape",
+    coordinates: { lat: -33.0123, lng: 27.4567 },
     manager: "John Makhanya",
     phone: "+27 83 123 4567",
     isActive: true,
-    products: 1
+    products: 2
   },
   {
-    id: "bunzhe",
-    name: "Bunzhe Farm",
-    address: "Next to JP Tshikalange Primary School, Bunzhe, Limpopo",
-    coordinates: { lat: -23.1234, lng: 29.5678 },
+    id: "agrinema-north",
+    name: "Agrinema North Farm",
+    address: "456 Valley View, Northern District, Eastern Cape",
+    coordinates: { lat: -32.8901, lng: 27.6789 },
     manager: "Sarah Ndlovu",
     phone: "+27 84 567 8901",
     isActive: true,
     products: 1
   },
   {
-    id: "xigalo",
-    name: "Xigalo Farm",
-    address: "Next to Cheapside and Balow Lodge, Xigalo, Limpopo",
-    coordinates: { lat: -23.2345, lng: 29.6789 },
+    id: "agrinema-coastal",
+    name: "Agrinema Coastal Farm",
+    address: "789 Coastal Road, Port Elizabeth, Eastern Cape",
+    coordinates: { lat: -33.9608, lng: 25.6022 },
     manager: "David Thompson",
     phone: "+27 82 345 6789",
-    isActive: true,
-    products: 1
-  },
-  {
-    id: "makasa",
-    name: "Makasa Farm",
-    address: "Makasa Village, Limpopo",
-    coordinates: { lat: -23.3456, lng: 29.7890 },
-    manager: "Thandiwe Mthembu",
-    phone: "+27 81 234 5678",
-    isActive: true,
-    products: 0
-  },
-  {
-    id: "tshivhulani",
-    name: "Tshivhulani Farm",
-    address: "Next to Cabal Villa, Tshivhulani, Limpopo",
-    coordinates: { lat: -23.4567, lng: 29.8901 },
-    manager: "Mpho Lebese",
-    phone: "+27 83 456 7890",
-    isActive: true,
-    products: 0
-  },
-  {
-    id: "vhudimbilu",
-    name: "Vhudimbilu Farm",
-    address: "Vhudimbilu Village, Limpopo",
-    coordinates: { lat: -23.5678, lng: 29.9012 },
-    manager: "Nomsa Maseko",
-    phone: "+27 84 678 9012",
     isActive: true,
     products: 0
   }
@@ -480,7 +450,7 @@ export async function DELETE(request: NextRequest) {
     
     // Update location product count
     if (locationId) {
-      const location = locations.find((loc: Location) => loc.id === locationId)
+    const location: Location | undefined = locations.find((loc: Location) => loc.id === locationId)
       if (location && location.products > 0) {
         location.products = Math.max(location.products - 1, 0)
         console.log('Updated location product count for:', locationId)

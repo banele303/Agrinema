@@ -156,7 +156,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              From farm to table, committed to food security and community wellness. Producing premium fresh vegetables,
+              From farm to tables, committed to food security and community wellness. Producing premium fresh vegetables,
               quality poultry, and essential ice products for South African families and businesses.
             </motion.p>
             <motion.div 
@@ -243,7 +243,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
-                        4
+                        6
                       </motion.div>
                       <p className="text-muted-foreground font-medium">Production Sites</p>
                       <motion.div 
@@ -1105,16 +1105,22 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 <h3 className="text-2xl font-bold mb-6">Our Locations</h3>
                 <div className="space-y-4 text-green-100">
                   <p>
-                    <strong>Xigalo:</strong> Next to Cheapside and Balow Lodge
-                  </p>
-                  <p>
                     <strong>Tshamutilikwa:</strong> Next to soccer ground
                   </p>
                   <p>
                     <strong>Bunzhe:</strong> Next to JP Tshikalange Primary School
                   </p>
                   <p>
+                    <strong>Xigalo:</strong> Next to Cheapside and Balow Lodge
+                  </p>
+                  <p>
+                    <strong>Makasa:</strong> Makasa Village
+                  </p>
+                  <p>
                     <strong>Tshivhulani:</strong> Next to Cabal Villa
+                  </p>
+                  <p>
+                    <strong>Vhudimbilu:</strong> Vhudimbilu Village
                   </p>
                 </div>
               </div>
