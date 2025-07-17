@@ -382,7 +382,7 @@ export default function AgrinemaFarmWebsite() {
             <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
               <div>
                 <Image
-                  src="/allproducts.jpg"
+                  src="/newbb.jpeg"
                   alt="Agrinema Farm sustainable agriculture practices in Limpopo"
                   width={500}
                   height={280}
