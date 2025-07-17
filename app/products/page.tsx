@@ -665,7 +665,7 @@ export default function ProductsPage() {
                       transition={{ duration: 0.4 }}
                     >
                       <Image
-                        src="/placeholder.svg?height=400&width=600"
+                        src="/poultry1.jpg"
                         alt="Agrinema Farm premium broiler chicken production facility"
                         width={600}
                         height={400}
