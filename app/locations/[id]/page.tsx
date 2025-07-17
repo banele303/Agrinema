@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, MapPin, Phone, User, Package, Navigation, Clock, ShoppingCart } from "lucide-react"
-import { Location, Product, Order } from "@/types/product"
+import { Location } from "@/types/product"
 import Link from "next/link"
 import Image from "next/image"
 import { useParams } from "next/navigation"
@@ -16,8 +16,6 @@ export default function LocationDetailPage() {
   const locationId = params.id as string
   
   const [location, setLocation] = useState<Location | null>(null)
-  const [products, setProducts] = useState<Product[]>([])
-  const [orders, setOrders] = useState<Order[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -28,23 +26,10 @@ export default function LocationDetailPage() {
 
   const loadLocationData = async () => {
     try {
-      const [locationsRes, productsRes, ordersRes] = await Promise.all([
-        fetch('/api/locations'),
-        fetch('/api/products'),
-        fetch('/api/orders')
-      ])
-
+      const locationsRes = await fetch('/api/locations')
       const locationsData = await locationsRes.json()
-      const productsData = await productsRes.json()
-      const ordersData = await ordersRes.json()
-
       const currentLocation = locationsData.find((loc: Location) => loc.id === locationId)
-      const locationProducts = productsData.filter((product: Product) => product.location?.id === locationId)
-      const locationOrders = ordersData.filter((order: Order) => order.location?.id === locationId)
-
       setLocation(currentLocation)
-      setProducts(locationProducts)
-      setOrders(locationOrders)
     } catch (error) {
       console.error('Error loading location data:', error)
     } finally {
@@ -78,8 +63,9 @@ export default function LocationDetailPage() {
     )
   }
 
-  const totalRevenue = orders.reduce((sum, order) => sum + order.totalAmount, 0)
-  const recentOrders = orders.slice(0, 5)
+  const totalProducts = location?.productAvailability?.length || 0
+  const availableProducts = location?.productAvailability?.filter(product => product.status === 'available').length || 0
+  const upcomingProducts = location?.productAvailability?.filter(product => product.status === 'upcoming').length || 0
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
@@ -123,8 +109,8 @@ export default function LocationDetailPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Products</p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{products.length}</p>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Products</p>
+                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{totalProducts}</p>
                   </div>
                   <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 shadow-lg">
                     <Package className="h-6 w-6 text-white" />
@@ -143,8 +129,8 @@ export default function LocationDetailPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Orders</p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{orders.length}</p>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Available Now</p>
+                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{availableProducts}</p>
                   </div>
                   <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg">
                     <ShoppingCart className="h-6 w-6 text-white" />
@@ -163,11 +149,11 @@ export default function LocationDetailPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Revenue</p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">R{totalRevenue.toFixed(0)}</p>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Coming Soon</p>
+                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{upcomingProducts}</p>
                   </div>
                   <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg">
-                    <Package className="h-6 w-6 text-white" />
+                    <Clock className="h-6 w-6 text-white" />
                   </div>
                 </div>
               </CardContent>
@@ -222,7 +208,7 @@ export default function LocationDetailPage() {
             </Card>
           </motion.div>
 
-          {/* Products */}
+          {/* Product Availability */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -231,103 +217,118 @@ export default function LocationDetailPage() {
           >
             <Card className="border-0 shadow-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
               <CardHeader>
-                <CardTitle>Products at this Location</CardTitle>
-                <CardDescription>All products available from {location.name}</CardDescription>
+                <CardTitle>Product Availability</CardTitle>
+                <CardDescription>Current and upcoming products from {location.name}</CardDescription>
               </CardHeader>
               <CardContent>
-                {products.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {products.map((product, index) => (
+                {location.productAvailability && location.productAvailability.length > 0 ? (
+                  <div className="space-y-4">
+                    {location.productAvailability.map((product, index) => (
                       <motion.div
-                        key={product.slug}
+                        key={index}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="flex items-center space-x-4 p-4 rounded-lg border border-gray-200 dark:border-gray-700"
+                        className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/50"
                       >
-                        <div className="w-12 h-12 relative rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700">
-                          <Image
-                            src={product.image}
-                            alt={product.title}
-                            fill
-                            className="object-cover"
-                          />
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 rounded-full ${
+                              product.status === 'available' 
+                                ? 'bg-green-500 animate-pulse' 
+                                : 'bg-orange-400'
+                            }`}></div>
+                            <h3 className="font-semibold text-gray-900 dark:text-white">{product.name}</h3>
+                            <Badge
+                              variant={product.category as any}
+                              className={`text-xs ${
+                                product.category === 'vegetables' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
+                                product.category === 'poultry' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400' :
+                                product.category === 'ice' ? 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-400' :
+                                'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
+                              }`}
+                            >
+                              {product.category}
+                            </Badge>
+                          </div>
+                          <span className={`text-sm px-3 py-1 rounded-full font-medium ${
+                            product.status === 'available'
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                              : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
+                          }`}>
+                            {product.availableDate}
+                          </span>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-gray-900 dark:text-white truncate">{product.title}</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">{product.price}</p>
-                        </div>
-                        <Badge variant={product.availability === "In Stock" ? "default" : "destructive"}>
-                          {product.availability}
-                        </Badge>
+
+                        {/* Product Details */}
+                        {product.details && (
+                          <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                            {product.details.area && (
+                              <div className="flex items-center space-x-2">
+                                <span className="font-medium text-gray-700 dark:text-gray-300">Area:</span>
+                                <span>{product.details.area}</span>
+                              </div>
+                            )}
+                            {product.details.plants && (
+                              <div className="flex items-center space-x-2">
+                                <span className="font-medium text-gray-700 dark:text-gray-300">Plants:</span>
+                                <span>{product.details.plants}</span>
+                              </div>
+                            )}
+                            {product.details.production && (
+                              <div className="flex items-center space-x-2">
+                                <span className="font-medium text-gray-700 dark:text-gray-300">Production:</span>
+                                <span>{product.details.production}</span>
+                              </div>
+                            )}
+                            {product.details.price && (
+                              <div className="flex items-center space-x-2">
+                                <span className="font-medium text-gray-700 dark:text-gray-300">Price:</span>
+                                <span className="text-green-600 dark:text-green-400 font-medium">{product.details.price}</span>
+                              </div>
+                            )}
+                            {product.details.stock && (
+                              <div className="flex items-center space-x-2">
+                                <span className="font-medium text-gray-700 dark:text-gray-300">Stock:</span>
+                                <span>{product.details.stock}</span>
+                              </div>
+                            )}
+                            {product.details.pricing && (
+                              <div className="space-y-1">
+                                <span className="font-medium text-gray-700 dark:text-gray-300">Pricing Tiers:</span>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                  {product.details.pricing.map((tier, tierIndex) => (
+                                    <div key={tierIndex} className="flex justify-between items-center text-xs bg-white dark:bg-gray-600 rounded p-2">
+                                      <span>{tier.range}</span>
+                                      <span className="text-green-600 dark:text-green-400 font-medium">{tier.price}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            {product.details.description && (
+                              <div className="mt-2">
+                                <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                                  {product.details.description}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </motion.div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8">
-                    <Package className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                    <p className="text-gray-500 dark:text-gray-400">No products at this location yet</p>
+                  <div className="text-center py-12">
+                    <Package className="h-16 w-16 mx-auto mb-4 text-gray-400" />
+                    <p className="text-gray-500 dark:text-gray-400 text-lg">No products available at this location yet</p>
+                    <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">Check back soon for updates</p>
                   </div>
                 )}
               </CardContent>
             </Card>
           </motion.div>
         </div>
-
-        {/* Recent Orders */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          <Card className="border-0 shadow-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
-            <CardHeader>
-              <CardTitle>Recent Orders</CardTitle>
-              <CardDescription>Latest orders from {location.name}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {recentOrders.length > 0 ? (
-                <div className="space-y-4">
-                  {recentOrders.map((order, index) => (
-                    <motion.div
-                      key={order.id}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-700"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-semibold">
-                          {order.customerName.charAt(0)}
-                        </div>
-                        <div>
-                          <p className="font-medium text-gray-900 dark:text-white">{order.customerName}</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {new Date(order.orderDate).toLocaleDateString()}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-bold text-gray-900 dark:text-white">R{order.totalAmount}</p>
-                        <Badge
-                          variant={order.status === "completed" ? "default" : "secondary"}
-                          className="text-xs"
-                        >
-                          {order.status}
-                        </Badge>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8">
-                  <ShoppingCart className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                  <p className="text-gray-500 dark:text-gray-400">No orders from this location yet</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </motion.div>
       </div>
     </div>
   )

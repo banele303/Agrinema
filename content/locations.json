@@ -1,7 +1,7 @@
 [
   {
     "id": "tshamutilikwa",
-    "name": "Tshamutilikwa Farm",
+    "name": "Tshamutilikwa Branch",
     "address": "Next to soccer ground, Tshamutilikwa, Limpopo",
     "coordinates": {
       "lat": -23.0123,
@@ -10,11 +10,23 @@
     "manager": "John Makhanya",
     "phone": "+27 83 123 4567",
     "isActive": true,
-    "products": 1
+    "products": 1,
+    "productAvailability": [
+      {
+        "name": "Hubbard Green Squash",
+        "status": "upcoming",
+        "availableDate": "25th of September 2025",
+        "category": "vegetables",
+        "details": {
+          "area": "1444m² (3.5 Ha)",
+          "description": "Premium quality Hubbard Green Squash"
+        }
+      }
+    ]
   },
   {
     "id": "bunzhe",
-    "name": "Bunzhe Farm",
+    "name": "Bunzhe Branch",
     "address": "Next to JP Tshikalange Primary School, Bunzhe, Limpopo",
     "coordinates": {
       "lat": -23.1234,
@@ -23,11 +35,65 @@
     "manager": "Sarah Ndlovu",
     "phone": "+27 84 567 8901",
     "isActive": true,
-    "products": 1
+    "products": 4,
+    "productAvailability": [
+      {
+        "name": "4 weeks Broiler Chicken (Live)",
+        "status": "available",
+        "availableDate": "Available Now",
+        "category": "poultry",
+        "details": {
+          "production": "1000 weekly intake",
+          "pricing": [
+            { "range": "Regular price", "price": "R70 each" },
+            { "range": "100+ chickens", "price": "R65 each" }
+          ],
+          "description": "Live 4 weeks broiler chickens with volume pricing"
+        }
+      },
+      {
+        "name": "4 weeks Broiler Chicken (Slaughtered)",
+        "status": "available",
+        "availableDate": "Available Now",
+        "category": "poultry",
+        "details": {
+          "production": "1000 weekly intake",
+          "pricing": [
+            { "range": "Without offals", "price": "R60 each" },
+            { "range": "100+ chickens", "price": "R50 each" }
+          ],
+          "description": "Slaughtered 4 weeks broiler chickens without offals"
+        }
+      },
+      {
+        "name": "6 weeks Broiler Chicken (Live)",
+        "status": "available",
+        "availableDate": "Available Now",
+        "category": "poultry",
+        "details": {
+          "pricing": [
+            { "range": "Live chicken", "price": "R110 each" }
+          ],
+          "description": "6 weeks broiler chickens - live"
+        }
+      },
+      {
+        "name": "6 weeks Broiler Chicken (Slaughtered)",
+        "status": "available",
+        "availableDate": "Available Now",
+        "category": "poultry",
+        "details": {
+          "pricing": [
+            { "range": "With offals", "price": "R120 each" }
+          ],
+          "description": "6 weeks broiler chickens slaughtered with offals"
+        }
+      }
+    ]
   },
   {
     "id": "xigalo",
-    "name": "Xigalo Farm",
+    "name": "Xigalo Branch",
     "address": "Next to Cheapside and Balow Lodge, Xigalo, Limpopo",
     "coordinates": {
       "lat": -23.2345,
@@ -36,7 +102,65 @@
     "manager": "David Thompson",
     "phone": "+27 82 345 6789",
     "isActive": true,
-    "products": 1
+    "products": 5,
+    "productAvailability": [
+      {
+        "name": "Okra",
+        "status": "available",
+        "availableDate": "Available Now",
+        "category": "vegetables",
+        "details": {
+          "area": "9917m²",
+          "production": "±100 Crates a month",
+          "price": "R200 per crate",
+          "description": "Fresh okra currently selling"
+        }
+      },
+      {
+        "name": "Onions",
+        "status": "upcoming",
+        "availableDate": "15th of September 2025",
+        "category": "vegetables",
+        "details": {
+          "area": "2570m²",
+          "plants": "25000 plants",
+          "description": "Premium quality onions"
+        }
+      },
+      {
+        "name": "Spinach",
+        "status": "upcoming",
+        "availableDate": "15th of August 2025",
+        "category": "vegetables",
+        "details": {
+          "area": "5151m²",
+          "plants": "12000 plants",
+          "description": "Fresh spinach leaves"
+        }
+      },
+      {
+        "name": "Potatoes",
+        "status": "upcoming",
+        "availableDate": "25th of July 2025",
+        "category": "vegetables",
+        "details": {
+          "area": "3252m²",
+          "plants": "4000 plants",
+          "description": "Quality potatoes ready for harvest"
+        }
+      },
+      {
+        "name": "Tomatoes",
+        "status": "upcoming",
+        "availableDate": "25th of August 2025",
+        "category": "vegetables",
+        "details": {
+          "area": "953m²",
+          "plants": "950 plants",
+          "description": "Fresh red tomatoes"
+        }
+      }
+    ]
   },
   {
     "id": "makasa",
@@ -53,7 +177,7 @@
   },
   {
     "id": "tshivhulani",
-    "name": "Tshivhulani Farm",
+    "name": "Tshivhulani Branch",
     "address": "Next to Cabal Villa, Tshivhulani, Limpopo",
     "coordinates": {
       "lat": -23.4567,
@@ -62,7 +186,49 @@
     "manager": "Mpho Lebese",
     "phone": "+27 83 456 7890",
     "isActive": true,
-    "products": 0
+    "products": 3,
+    "productAvailability": [
+      {
+        "name": "Ice Cubes",
+        "status": "available",
+        "availableDate": "Available Now",
+        "category": "ice",
+        "details": {
+          "stock": "4213 bags",
+          "pricing": [
+            { "range": "1-50 bags", "price": "R17 each" },
+            { "range": "50-100 bags", "price": "R12 each" },
+            { "range": "100+ bags", "price": "R10 each" }
+          ],
+          "description": "Premium quality ice cubes with volume pricing"
+        }
+      },
+      {
+        "name": "Ice Blocks",
+        "status": "available",
+        "availableDate": "Available Now",
+        "category": "ice",
+        "details": {
+          "stock": "84 bags (4kg blocks)",
+          "pricing": [
+            { "range": "1-50 bags", "price": "R20 each" },
+            { "range": "50+ bags", "price": "R15 each" }
+          ],
+          "description": "4kg ice blocks with volume pricing"
+        }
+      },
+      {
+        "name": "Butternut Squash",
+        "status": "upcoming",
+        "availableDate": "15th of September 2025",
+        "category": "vegetables",
+        "details": {
+          "area": "200m²",
+          "plants": "1500 plants",
+          "description": "Quality butternut squash"
+        }
+      }
+    ]
   },
   {
     "id": "vhudimbilu",

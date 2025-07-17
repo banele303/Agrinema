@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -9,7 +10,7 @@ import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { motion } from "framer-motion"
 import ProductsListing from "@/components/products-listing"
-import { Product } from "@/types/product"
+import { Product, Location } from "@/types/product"
 
 // Modern animation variants for cards
 const cardVariants = {
@@ -71,6 +72,71 @@ const glowEffect = {
 }
 
 export default function AgrinemaFarmWebsite({ products = [] }: { products?: Product[] }) {
+  const [locations, setLocations] = useState<Location[]>([])
+  const [isLoadingLocations, setIsLoadingLocations] = useState(true)
+
+  useEffect(() => {
+    loadLocations()
+  }, [])
+
+  const loadLocations = async () => {
+    try {
+      const response = await fetch('/api/locations')
+      const data = await response.json()
+      setLocations(data)
+    } catch (error) {
+      console.error('Error loading locations:', error)
+    } finally {
+      setIsLoadingLocations(false)
+    }
+  }
+
+  // Helper function to get category icon
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'vegetables': return '🥬'
+      case 'poultry': return '🐔'
+      case 'ice': return '🧊'
+      default: return '🌱'
+    }
+  }
+
+  // Helper function to get location gradient based on index
+  const getLocationStyle = (index: number) => {
+    const styles = [
+      {
+        gradient: "from-green-500 to-emerald-600",
+        bgGradient: "from-green-50 to-emerald-100",
+        borderColor: "border-green-200 hover:border-green-400",
+      },
+      {
+        gradient: "from-emerald-500 to-teal-600",
+        bgGradient: "from-emerald-50 to-teal-100",
+        borderColor: "border-emerald-200 hover:border-emerald-400",
+      },
+      {
+        gradient: "from-teal-500 to-cyan-600",
+        bgGradient: "from-teal-50 to-cyan-100",
+        borderColor: "border-teal-200 hover:border-teal-400",
+      },
+      {
+        gradient: "from-cyan-500 to-blue-600",
+        bgGradient: "from-cyan-50 to-blue-100",
+        borderColor: "border-cyan-200 hover:border-cyan-400",
+      },
+      {
+        gradient: "from-blue-500 to-indigo-600",
+        bgGradient: "from-blue-50 to-indigo-100",
+        borderColor: "border-blue-200 hover:border-blue-400",
+      },
+      {
+        gradient: "from-indigo-500 to-purple-600",
+        bgGradient: "from-indigo-50 to-purple-100",
+        borderColor: "border-indigo-200 hover:border-indigo-400",
+      }
+    ]
+    return styles[index % styles.length]
+  }
   return (
     <motion.div 
       className="bg-background overflow-x-hidden w-full"
@@ -608,129 +674,184 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
             >
-              {[
-                {
-                  name: "Tshamutilikwa Farm",
-                  location: "Next to soccer ground",
-                  gradient: "from-green-500 to-emerald-600",
-                  bgGradient: "from-green-50 to-emerald-100",
-                  borderColor: "border-green-200 hover:border-green-400",
-                  icon: "🌱"
-                },
-                {
-                  name: "Bunzhe Farm",
-                  location: "Next to JP Tshikalange Primary School",
-                  gradient: "from-emerald-500 to-teal-600",
-                  bgGradient: "from-emerald-50 to-teal-100",
-                  borderColor: "border-emerald-200 hover:border-emerald-400",
-                  icon: "🍅"
-                },
-                {
-                  name: "Xigalo Farm",
-                  location: "Next to Cheapside and Balow Lodge",
-                  gradient: "from-teal-500 to-cyan-600",
-                  bgGradient: "from-teal-50 to-cyan-100",
-                  borderColor: "border-teal-200 hover:border-teal-400",
-                  icon: "🥬"
-                },
-                {
-                  name: "Makasa Farm",
-                  location: "Makasa Village",
-                  gradient: "from-cyan-500 to-blue-600",
-                  bgGradient: "from-cyan-50 to-blue-100",
-                  borderColor: "border-cyan-200 hover:border-cyan-400",
-                  icon: "🧅"
-                },
-                {
-                  name: "Tshivhulani Farm",
-                  location: "Next to Cabal Villa",
-                  gradient: "from-blue-500 to-indigo-600",
-                  bgGradient: "from-blue-50 to-indigo-100",
-                  borderColor: "border-blue-200 hover:border-blue-400",
-                  icon: "🌶️"
-                },
-                {
-                  name: "Vhudimbilu Farm",
-                  location: "Vhudimbilu Village",
-                  gradient: "from-indigo-500 to-purple-600",
-                  bgGradient: "from-indigo-50 to-purple-100",
-                  borderColor: "border-indigo-200 hover:border-indigo-400",
-                  icon: "🥕"
-                }
-              ].map((farm, index) => (
-                <motion.div key={index} variants={cardVariants}>
-                  <motion.div
-                    whileHover={modernCardHover}
-                    className="relative group h-full"
-                  >
-                    <Card className={`border-2 ${farm.borderColor} bg-gradient-to-br from-white via-gray-50 ${farm.bgGradient} dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 rounded-3xl overflow-hidden relative backdrop-blur-sm shadow-xl h-full transition-all duration-500`}>
-                      <motion.div 
-                        className={`absolute top-0 left-0 w-full h-3 bg-gradient-to-r ${farm.gradient}`}
-                        initial={{ scaleX: 0, originX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 + index * 0.1, duration: 1.2, ease: "easeOut" }}
-                      />
-                      <CardHeader className="p-8 relative">
-                        <motion.div 
-                          className="flex items-center gap-4 mb-4"
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
-                        >
-                          <motion.div
-                            className="text-4xl"
-                            whileHover={{ scale: 1.2, rotate: 10 }}
-                            transition={{ type: "spring", stiffness: 400 }}
-                          >
-                            {farm.icon}
-                          </motion.div>
-                          <div>
-                            <CardTitle className="text-foreground text-xl font-bold">{farm.name}</CardTitle>
+              {isLoadingLocations ? (
+                // Loading skeleton
+                Array.from({ length: 6 }).map((_, index) => (
+                  <motion.div key={index} variants={cardVariants}>
+                    <Card className="border-2 border-gray-200 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 rounded-3xl overflow-hidden relative backdrop-blur-sm shadow-xl h-full">
+                      <CardHeader className="p-8">
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse"></div>
+                          <div className="space-y-2">
+                            <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded animate-pulse w-32"></div>
+                            <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded animate-pulse w-24"></div>
                           </div>
-                        </motion.div>
-                        <motion.div 
-                          className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
-                          whileHover={{ scale: 1.2, rotate: 180 }}
-                          transition={{ duration: 0.4 }}
-                        >
-                          <div className="w-full h-full rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
-                            <MapPin className="w-5 h-5 text-white" />
-                          </div>
-                        </motion.div>
+                        </div>
                       </CardHeader>
-                      <CardContent className="p-8 pt-0 relative">
-                        <motion.div 
-                          className="flex items-start gap-3 mb-4"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
-                        >
-                          <MapPin className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
-                          <p className="text-muted-foreground leading-relaxed">{farm.location}</p>
-                        </motion.div>
-                        <motion.div 
-                          className="flex items-center gap-2 text-sm text-green-600 font-medium"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                        >
-                          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                          <span>Active Production Site</span>
-                        </motion.div>
-                        <motion.div 
-                          className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-br from-gray-200/20 to-transparent rounded-full -mr-10 -mb-10"
-                          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-                          transition={{ duration: 8, repeat: Infinity, delay: index * 1.5 }}
-                        />
+                      <CardContent className="p-8 pt-0">
+                        <div className="space-y-3">
+                          <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded animate-pulse w-full"></div>
+                          <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded animate-pulse w-3/4"></div>
+                        </div>
                       </CardContent>
                     </Card>
                   </motion.div>
-                </motion.div>
-              ))}
+                ))
+              ) : (
+                locations.map((location, index) => {
+                  const style = getLocationStyle(index)
+                  const availableProducts = location.productAvailability?.filter(p => p.status === 'available') || []
+                  const upcomingProducts = location.productAvailability?.filter(p => p.status === 'upcoming') || []
+                  
+                  return (
+                    <motion.div key={location.id} variants={cardVariants}>
+                      <motion.div
+                        whileHover={modernCardHover}
+                        className="relative group h-full"
+                      >
+                        <Card className={`border-2 ${style.borderColor} bg-gradient-to-br from-white via-gray-50 ${style.bgGradient} dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 rounded-3xl overflow-hidden relative backdrop-blur-sm shadow-xl h-full transition-all duration-500`}>
+                          <motion.div 
+                            className={`absolute top-0 left-0 w-full h-3 bg-gradient-to-r ${style.gradient}`}
+                            initial={{ scaleX: 0, originX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 + index * 0.1, duration: 1.2, ease: "easeOut" }}
+                          />
+                          <CardHeader className="p-8 relative">
+                            <motion.div 
+                              className="flex items-center gap-4 mb-4"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                            >
+                              <motion.div
+                                className="text-4xl"
+                                whileHover={{ scale: 1.2, rotate: 10 }}
+                                transition={{ type: "spring", stiffness: 400 }}
+                              >
+                                {location.productAvailability && location.productAvailability.length > 0 
+                                  ? getCategoryIcon(location.productAvailability[0].category)
+                                  : '🌱'
+                                }
+                              </motion.div>
+                              <div>
+                                <CardTitle className="text-foreground text-xl font-bold">{location.name}</CardTitle>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <Badge variant="secondary" className="text-xs">
+                                    {availableProducts.length + upcomingProducts.length} products
+                                  </Badge>
+                                  {availableProducts.length > 0 && (
+                                    <Badge className="text-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                      {availableProducts.length} available
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            </motion.div>
+                            <motion.div 
+                              className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
+                              whileHover={{ scale: 1.2, rotate: 180 }}
+                              transition={{ duration: 0.4 }}
+                            >
+                              <div className="w-full h-full rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
+                                <MapPin className="w-5 h-5 text-white" />
+                              </div>
+                            </motion.div>
+                          </CardHeader>
+                          <CardContent className="p-8 pt-0 relative">
+                            <motion.div 
+                              className="flex items-start gap-3 mb-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+                            >
+                              <MapPin className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                              <p className="text-muted-foreground leading-relaxed text-sm">{location.address}</p>
+                            </motion.div>
+
+                            {/* Product List */}
+                            {location.productAvailability && location.productAvailability.length > 0 && (
+                              <motion.div 
+                                className="space-y-2 mb-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.7 + index * 0.1, duration: 0.6 }}
+                              >
+                                <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Available Products:</p>
+                                <div className="space-y-1 max-h-32 overflow-y-auto">
+                                  {location.productAvailability.slice(0, 4).map((product, productIndex) => (
+                                    <div key={productIndex} className="flex items-center justify-between text-xs">
+                                      <div className="flex items-center gap-2">
+                                        <span className="text-lg">{getCategoryIcon(product.category)}</span>
+                                        <span className="text-gray-600 dark:text-gray-400 truncate max-w-32">
+                                          {product.name}
+                                        </span>
+                                      </div>
+                                      <Badge 
+                                        className={`text-xs px-2 py-0 ${
+                                          product.status === 'available'
+                                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                                            : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
+                                        }`}
+                                      >
+                                        {product.status === 'available' ? 'Now' : 'Soon'}
+                                      </Badge>
+                                    </div>
+                                  ))}
+                                  {location.productAvailability.length > 4 && (
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+                                      +{location.productAvailability.length - 4} more...
+                                    </p>
+                                  )}
+                                </div>
+                              </motion.div>
+                            )}
+
+                            <motion.div 
+                              className="flex items-center gap-2 text-sm text-green-600 font-medium"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                            >
+                              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                              <span>Active Production Site</span>
+                            </motion.div>
+
+                            {/* View Details Button */}
+                            <motion.div 
+                              className="mt-4"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.9 + index * 0.1, duration: 0.6 }}
+                            >
+                              <Link href={`/locations/${location.id}`}>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="w-full text-xs hover:bg-green-50 dark:hover:bg-green-900/20 border-green-200 hover:border-green-400"
+                                >
+                                  View Details
+                                </Button>
+                              </Link>
+                            </motion.div>
+
+                            <motion.div 
+                              className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-br from-gray-200/20 to-transparent rounded-full -mr-10 -mb-10"
+                              animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+                              transition={{ duration: 8, repeat: Infinity, delay: index * 1.5 }}
+                            />
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    </motion.div>
+                  )
+                })
+              )}
             </motion.div>
 
             <motion.div 

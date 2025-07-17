@@ -11,8 +11,8 @@ let locationsData: any[] | null = null
 const DEFAULT_LOCATIONS_DATA = [
   {
     id: "tshamutilikwa",
-    name: "Tshamutilikwa Farm",
-    address: "Next to soccer ground",
+    name: "Tshamutilikwa Branch",
+    address: "Next to soccer ground, Tshamutilikwa",
     coordinates: { lat: -23.0865, lng: 29.4176 },
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
@@ -33,8 +33,8 @@ const DEFAULT_LOCATIONS_DATA = [
   },
   {
     id: "bunzhe",
-    name: "Bunzhe Farm",
-    address: "Next to JP Tshikalange Primary School",
+    name: "Bunzhe Branch",
+    address: "Next to JP Tshikalange Primary School, Bunzhe",
     coordinates: { lat: -23.1256, lng: 29.3847 },
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
@@ -97,8 +97,8 @@ const DEFAULT_LOCATIONS_DATA = [
   },
   {
     id: "xigalo",
-    name: "Xigalo Farm",
-    address: "Next to Cheapside and Balow Lodge",
+    name: "Xigalo Branch",
+    address: "Next to Cheapside and Balow Lodge, Xigalo",
     coordinates: { lat: -23.0945, lng: 29.4523 },
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
@@ -118,14 +118,14 @@ const DEFAULT_LOCATIONS_DATA = [
         }
       },
       {
-        name: "Potatoes",
+        name: "Onions",
         status: "upcoming",
-        availableDate: "25th of July 2025",
+        availableDate: "15th of September 2025",
         category: "vegetables",
         details: {
-          area: "3252m²",
-          plants: "4000 plants",
-          description: "Quality potatoes ready for harvest"
+          area: "2570m²",
+          plants: "25000 plants",
+          description: "Premium quality onions"
         }
       },
       {
@@ -140,14 +140,14 @@ const DEFAULT_LOCATIONS_DATA = [
         }
       },
       {
-        name: "Onions",
+        name: "Potatoes",
         status: "upcoming",
-        availableDate: "15th of September 2025",
+        availableDate: "25th of July 2025",
         category: "vegetables",
         details: {
-          area: "2570m²",
-          plants: "25000 plants",
-          description: "Premium quality onions"
+          area: "3252m²",
+          plants: "4000 plants",
+          description: "Quality potatoes ready for harvest"
         }
       },
       {
@@ -175,8 +175,8 @@ const DEFAULT_LOCATIONS_DATA = [
   },
   {
     id: "tshivhulani",
-    name: "Tshivhulani Farm",
-    address: "Next to Cabal Villa",
+    name: "Tshivhulani Branch",
+    address: "Next to Cabal Villa, Tshivhulani",
     coordinates: { lat: -23.0723, lng: 29.4312 },
     phone: "+27 67 347 0687",
     email: "info@agrinemafarm.co.za",
