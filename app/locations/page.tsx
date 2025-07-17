@@ -14,19 +14,19 @@ import { Navbar } from "@/components/navbar"
 // Modern animation variants matching homepage
 const cardVariants = {
   hidden: { 
-    y: 50, 
+    y: 30, 
     opacity: 0, 
-    scale: 0.95
+    scale: 0.98
   },
   visible: { 
     y: 0, 
     opacity: 1, 
     scale: 1,
     transition: { 
-      duration: 0.6, 
+      duration: 0.5, 
       type: "spring" as const,
-      stiffness: 120,
-      damping: 25
+      stiffness: 150,
+      damping: 20
     } 
   }
 }
@@ -36,8 +36,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
+      staggerChildren: 0.1,
+      delayChildren: 0.05
     }
   }
 }
@@ -68,20 +68,9 @@ const glowEffect = {
 export default function LocationsPage() {
   const [locations, setLocations] = useState<Location[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    // Check if device is mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
     loadLocations()
-    
-    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   const loadLocations = async () => {
@@ -332,27 +321,22 @@ export default function LocationsPage() {
 
           {/* Locations Cards Grid */}
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0"
-            variants={isMobile ? {} : containerVariants}
-            initial={isMobile ? { opacity: 1 } : "hidden"}
-            whileInView={isMobile ? { opacity: 1 } : "visible"}
-            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0 opacity-100"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            style={{ minHeight: '200px' }}
           >
             {locations.map((location, index) => (
               <motion.div
                 key={location.id}
-                variants={isMobile ? {} : cardVariants}
-                whileHover={isMobile ? {} : modernCardHover}
-                className="group"
-                initial={isMobile ? { opacity: 1 } : "hidden"}
-                animate={isMobile ? { opacity: 1 } : undefined}
+                variants={cardVariants}
+                whileHover={modernCardHover}
+                className="group opacity-100"
+                style={{ visibility: 'visible' }}
               >
-                <Card className="h-full border-0 shadow-lg sm:shadow-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md hover:shadow-2xl transition-all duration-300 rounded-xl sm:rounded-2xl overflow-hidden mx-2 sm:mx-0 opacity-100"
-                  style={{ 
-                    transform: isMobile ? 'none' : undefined,
-                    visibility: 'visible'
-                  }}
-                >
+                <Card className="h-full border-0 shadow-lg sm:shadow-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md hover:shadow-2xl transition-all duration-300 rounded-xl sm:rounded-2xl overflow-hidden mx-2 sm:mx-0">
                   {/* Card Header with Farm Image */}
                   <div className="relative h-40 sm:h-48 overflow-hidden">
                     <Image
