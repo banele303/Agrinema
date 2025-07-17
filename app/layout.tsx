@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { FloatingActions } from "@/components/floating-actions"
+import { ConditionalFloatingActions } from "@/components/conditional-floating-actions"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
-          <FloatingActions />
+          <ConditionalFloatingActions />
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,158 @@
+[
+  {
+    "id": "ORD-2024-001",
+    "productId": "fresh-tomatoes",
+    "customerName": "Nomsa Mbeki",
+    "customerPhone": "+27 81 234 5678",
+    "customerEmail": "nomsa.mbeki@email.com",
+    "quantity": 5,
+    "totalAmount": 125,
+    "status": "completed",
+    "location": {
+      "id": "agrinema-main",
+      "name": "Agrinema Main Farm",
+      "address": "123 Farm Road, Rural District, Eastern Cape",
+      "coordinates": {
+        "lat": -33.0123,
+        "lng": 27.4567
+      },
+      "manager": "John Makhanya",
+      "phone": "+27 83 123 4567",
+      "isActive": true,
+      "products": 0
+    },
+    "locationId": "agrinema-main",
+    "orderDate": "2024-07-17T10:30:00Z",
+    "deliveryDate": "2024-07-19T00:00:00.000Z",
+    "notes": "Please deliver in the morning. Will pay cash on delivery.",
+    "updatedAt": "2025-07-17T12:01:20.227Z"
+  },
+  {
+    "id": "ORD-2024-002",
+    "productId": "sweet-onions",
+    "customerName": "Thabo Molefe",
+    "customerPhone": "+27 82 345 6789",
+    "quantity": 10,
+    "totalAmount": 180,
+    "status": "preparing",
+    "location": {
+      "id": "agrinema-north",
+      "name": "Agrinema North Farm",
+      "address": "456 Valley View, Northern District, Eastern Cape",
+      "coordinates": {
+        "lat": -32.8901,
+        "lng": 27.6789
+      },
+      "manager": "Sarah Ndlovu",
+      "phone": "+27 84 567 8901",
+      "isActive": true,
+      "products": 1
+    },
+    "locationId": "agrinema-north",
+    "orderDate": "2024-07-17T14:15:00Z",
+    "notes": "Urgent order for restaurant. Quality check required."
+  },
+  {
+    "id": "ORD-2024-003",
+    "productId": "free-range-chickens",
+    "customerName": "Lindiwe Khumalo",
+    "customerPhone": "+27 83 456 7890",
+    "customerEmail": "lindiwe.k@gmail.com",
+    "quantity": 3,
+    "totalAmount": 450,
+    "status": "ready",
+    "location": {
+      "id": "agrinema-coastal",
+      "name": "Agrinema Coastal Farm",
+      "address": "789 Coastal Road, Port Elizabeth, Eastern Cape",
+      "coordinates": {
+        "lat": -33.9608,
+        "lng": 25.6022
+      },
+      "manager": "David Thompson",
+      "phone": "+27 82 345 6789",
+      "isActive": true,
+      "products": 0
+    },
+    "locationId": "agrinema-coastal",
+    "orderDate": "2024-07-16T16:45:00Z",
+    "deliveryDate": "2024-07-18T09:00:00Z"
+  },
+  {
+    "id": "ORD-2024-004",
+    "productId": "premium-ice-blocks",
+    "customerName": "Sipho Dlamini",
+    "customerPhone": "+27 84 567 8901",
+    "quantity": 20,
+    "totalAmount": 240,
+    "status": "completed",
+    "location": {
+      "id": "agrinema-main",
+      "name": "Agrinema Main Farm",
+      "address": "123 Farm Road, Rural District, Eastern Cape",
+      "coordinates": {
+        "lat": -33.0123,
+        "lng": 27.4567
+      },
+      "manager": "John Makhanya",
+      "phone": "+27 83 123 4567",
+      "isActive": true,
+      "products": 0
+    },
+    "locationId": "agrinema-main",
+    "orderDate": "2024-07-16T11:20:00Z",
+    "deliveryDate": "2024-07-17T15:30:00Z",
+    "notes": "Customer very satisfied with quality."
+  },
+  {
+    "id": "ORD-2024-005",
+    "productId": "baby-spinach",
+    "customerName": "Zanele Ntuli",
+    "customerPhone": "+27 85 678 9012",
+    "quantity": 8,
+    "totalAmount": 160,
+    "status": "pending",
+    "location": {
+      "id": "agrinema-north",
+      "name": "Agrinema North Farm",
+      "address": "456 Valley View, Northern District, Eastern Cape",
+      "coordinates": {
+        "lat": -32.8901,
+        "lng": 27.6789
+      },
+      "manager": "Sarah Ndlovu",
+      "phone": "+27 84 567 8901",
+      "isActive": true,
+      "products": 1
+    },
+    "locationId": "agrinema-north",
+    "orderDate": "2024-07-17T17:00:00Z",
+    "notes": "New customer - verify contact details."
+  },
+  {
+    "id": "ORD-2024-006",
+    "productId": "testing-this",
+    "customerName": "Mandla Zulu",
+    "customerPhone": "+27 86 789 0123",
+    "customerEmail": "mandla.zulu@business.co.za",
+    "quantity": 2,
+    "totalAmount": 75,
+    "status": "confirmed",
+    "location": {
+      "id": "agrinema-coastal",
+      "name": "Agrinema Coastal Farm",
+      "address": "789 Coastal Road, Port Elizabeth, Eastern Cape",
+      "coordinates": {
+        "lat": -33.9608,
+        "lng": 25.6022
+      },
+      "manager": "David Thompson",
+      "phone": "+27 82 345 6789",
+      "isActive": true,
+      "products": 0
+    },
+    "locationId": "agrinema-coastal",
+    "orderDate": "2024-07-17T13:10:00Z",
+    "notes": "Regular customer - prioritize delivery."
+  }
+]

@@ -8,6 +8,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { motion } from "framer-motion"
+import ProductsListing from "@/components/products-listing"
+import { Product } from "@/types/product"
 
 // Modern animation variants for cards
 const cardVariants = {
@@ -68,7 +70,7 @@ const glowEffect = {
   }
 }
 
-export default function AgrinemaFarmWebsite() {
+export default function AgrinemaFarmWebsite({ products = [] }: { products?: Product[] }) {
   return (
     <motion.div 
       className="bg-background overflow-x-hidden w-full"
@@ -80,9 +82,9 @@ export default function AgrinemaFarmWebsite() {
       {/* Navigation */}
       <Navbar />
 
-      {/* WhatsApp Floating Button */}
+      {/* WhatsApp Floating Button - Mobile Friendly */}
       <motion.div 
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
@@ -93,14 +95,14 @@ export default function AgrinemaFarmWebsite() {
           href="https://wa.me/27673470687" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-14 h-14 rounded-full shadow-2xl transition-all duration-300 hover:shadow-green-500/50 overflow-hidden"
+          className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-2xl transition-all duration-300 hover:shadow-green-500/50 group"
         >
           <Image
             src="/icons8-whatsapp-50.png"
             alt="WhatsApp"
-            width={56}
-            height={56}
-            className="rounded-full object-cover"
+            width={32}
+            height={32}
+            className="w-6 h-6 sm:w-8 sm:h-8 object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-200"
             priority
           />
         </Link>
@@ -136,12 +138,12 @@ export default function AgrinemaFarmWebsite() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <Badge className="mb-6 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 px-4 py-2 text-lg">
+              <Badge className="mb-4 sm:mb-6 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 px-3 sm:px-4 py-2 text-xs sm:text-sm">
                 Est. 2022 • Limpopo, South Africa
               </Badge>
             </motion.div>
             <motion.h1 
-              className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -149,7 +151,7 @@ export default function AgrinemaFarmWebsite() {
               Freshness Rooted in <span className="text-green-400">Limpopo</span>
             </motion.h1>
             <motion.p 
-              className="text-xl md:text-2xl text-green-100 mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg sm:text-xl md:text-2xl text-green-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
@@ -158,27 +160,27 @@ export default function AgrinemaFarmWebsite() {
               quality poultry, and essential ice products for South African families and businesses.
             </motion.p>
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-2 px-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.6 }}
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="/contact">
-                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-4">
-                    <Phone className="h-5 w-5 mr-2" />
+                <Link href="/contact" className="block w-full sm:w-auto">
+                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto">
+                    <Phone className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Get in Touch
                   </Button>
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="/products">
+                <Link href="/products" className="block w-full sm:w-auto">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-green-950 text-lg px-8 py-4 bg-transparent"
+                    className="border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-green-950 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 bg-transparent w-full sm:w-auto"
                   >
-                    <Leaf className="h-5 w-5 mr-2" />
+                    <Leaf className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Our Products
                   </Button>
                 </Link>
@@ -367,50 +369,61 @@ export default function AgrinemaFarmWebsite() {
       </motion.section>
 
       {/* About Us Section */}
-      <section id="about" className="py-20 bg-muted/50">
+      <section id="about" className="py-12 sm:py-16 lg:py-20 bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <Badge className="mb-4 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100">
+            <div className="text-center mb-12 sm:mb-16">
+              <Badge className="mb-4 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 text-sm">
                 Our Story
               </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Cultivating Excellence Since 2022</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6 px-2">
+                Cultivating Excellence Since 2022
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
                 Born from a vision to transform South African agriculture and ensure food security for all communities
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-              <div>
-                <Image
-                  src="/newbb.jpeg"
-                  alt="Agrinema Farm sustainable agriculture practices in Limpopo"
-                  width={500}
-                  height={280}
-                  className="rounded-2xl shadow-2xl object-cover"
-                />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 lg:mb-16">
+              <div className="order-2 lg:order-1">
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  <Image
+                    src="/newbb.jpeg"
+                    alt="Agrinema Farm sustainable agriculture practices in Limpopo"
+                    width={500}
+                    height={300}
+                    className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 500px"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
               </div>
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-foreground">Pioneering Sustainable Agriculture in Limpopo</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+              <div className="space-y-4 sm:space-y-6 order-1 lg:order-2 px-2 sm:px-0">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
+                  Pioneering Sustainable Agriculture in Limpopo
+                </h3>
+                <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
                   Agrinema Farm was established in 2022 with a clear mission: to revolutionize food production in
                   Limpopo Province and contribute meaningfully to South Africa&apos;s food security landscape. Founded by
                   experienced agricultural professionals who understand the unique challenges and opportunities of South
                   African farming, we have quickly become a trusted name in fresh produce, poultry, and ice production.
                 </p>
-                <p className="text-lg text-muted-foreground leading-relaxed pb-3">
+                <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed pb-2 sm:pb-3">
                   Our commitment extends beyond mere production. We believe in sustainable farming practices that
                   protect our environment while delivering exceptional quality. Every tomato, onion, pepper, and chicken
                   that leaves our farms represents our dedication to excellence, affordability, and community health.
                 </p>
-                <Link href="/about">
-                  <Button className="bg-green-600 hover:bg-green-700">Learn More About Us</Button>
+                <Link href="/about" className="inline-block">
+                  <Button className="bg-green-600 hover:bg-green-700 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3">
+                    Learn More About Us
+                  </Button>
                 </Link>
               </div>
             </div>
 
             <motion.div 
-              className="grid md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -419,9 +432,9 @@ export default function AgrinemaFarmWebsite() {
               <motion.div variants={cardVariants}>
                 <motion.div
                   whileHover={modernCardHover}
-                  className="relative group"
+                  className="relative group h-full"
                 >
-                  <Card className="border-2 border-green-100 hover:border-green-300 bg-gradient-to-br from-white via-green-50 to-emerald-50 dark:from-gray-900 dark:via-green-950 dark:to-emerald-950 rounded-2xl overflow-hidden relative backdrop-blur-sm shadow-xl">
+                  <Card className="border-2 border-green-100 hover:border-green-300 bg-gradient-to-br from-white via-green-50 to-emerald-50 dark:from-gray-900 dark:via-green-950 dark:to-emerald-950 rounded-xl sm:rounded-2xl overflow-hidden relative backdrop-blur-sm shadow-xl h-full">
                     <motion.div 
                       className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-400 via-emerald-500 to-green-600"
                       initial={{ scaleX: 0 }}
@@ -429,23 +442,23 @@ export default function AgrinemaFarmWebsite() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.3, duration: 1 }}
                     />
-                    <CardHeader className="text-center pb-2 relative">
+                    <CardHeader className="text-center pb-2 relative p-4 sm:p-6">
                       <motion.div
                         whileHover={{ rotate: 360, scale: 1.2 }}
                         transition={{ duration: 0.6 }}
                         className="inline-block"
                       >
-                        <Users className="h-16 w-16 text-green-600 mx-auto mb-4" />
+                        <Users className="h-12 w-12 sm:h-16 sm:w-16 text-green-600 mx-auto mb-3 sm:mb-4" />
                       </motion.div>
-                      <CardTitle className="text-foreground text-xl">Community First</CardTitle>
+                      <CardTitle className="text-foreground text-lg sm:text-xl">Community First</CardTitle>
                       <motion.div 
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full opacity-60"
+                        className="absolute -top-2 -right-2 w-4 h-4 sm:w-6 sm:h-6 bg-green-400 rounded-full opacity-60"
                         animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0.2, 0.6] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       />
                     </CardHeader>
-                    <CardContent className="relative">
-                      <p className="text-muted-foreground text-center leading-relaxed">
+                    <CardContent className="relative p-4 sm:p-6">
+                      <p className="text-muted-foreground text-center leading-relaxed text-sm sm:text-base">
                         Employing local talent and contributing to community development through sustainable agricultural
                         practices and job creation.
                       </p>
@@ -462,9 +475,9 @@ export default function AgrinemaFarmWebsite() {
               <motion.div variants={cardVariants}>
                 <motion.div
                   whileHover={modernCardHover}
-                  className="relative group"
+                  className="relative group h-full"
                 >
-                  <Card className="border-2 border-amber-100 hover:border-amber-300 bg-gradient-to-br from-white via-amber-50 to-orange-50 dark:from-gray-900 dark:via-amber-950 dark:to-orange-950 rounded-2xl overflow-hidden relative backdrop-blur-sm shadow-xl">
+                  <Card className="border-2 border-amber-100 hover:border-amber-300 bg-gradient-to-br from-white via-amber-50 to-orange-50 dark:from-gray-900 dark:via-amber-950 dark:to-orange-950 rounded-xl sm:rounded-2xl overflow-hidden relative backdrop-blur-sm shadow-xl h-full">
                     <motion.div 
                       className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-600"
                       initial={{ scaleX: 0 }}
@@ -472,25 +485,25 @@ export default function AgrinemaFarmWebsite() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.6, duration: 1 }}
                     />
-                    <CardHeader className="text-center pb-2 relative">
+                    <CardHeader className="text-center pb-2 relative p-4 sm:p-6">
                       <motion.div
                         whileHover={{ rotate: 360, scale: 1.2 }}
                         transition={{ duration: 0.6 }}
                         className="inline-block"
                       >
-                        <Award className="h-16 w-16 text-amber-600 mx-auto mb-4" />
+                        <Award className="h-12 w-12 sm:h-16 sm:w-16 text-amber-600 mx-auto mb-3 sm:mb-4" />
                       </motion.div>
-                      <CardTitle className="text-foreground text-xl">Quality Assured</CardTitle>
+                      <CardTitle className="text-foreground text-lg sm:text-xl">Quality Assured</CardTitle>
                       <motion.div 
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-amber-400 rounded-full opacity-60"
+                        className="absolute -top-2 -right-2 w-4 h-4 sm:w-6 sm:h-6 bg-amber-400 rounded-full opacity-60"
                         animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0.2, 0.6] }}
                         transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
                       />
                     </CardHeader>
-                    <CardContent className="relative">
-                      <p className="text-muted-foreground text-center leading-relaxed">
-                        Rigorous quality control processes ensure every product meets the highest standards for freshness,
-                        safety, and nutritional value.
+                    <CardContent className="relative p-4 sm:p-6">
+                      <p className="text-muted-foreground text-center leading-relaxed text-sm sm:text-base">
+                        Rigorous quality control ensures every product meets the highest standards of freshness,
+                        nutrition, and taste for our valued customers.
                       </p>
                       <motion.div 
                         className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-30"
@@ -505,9 +518,9 @@ export default function AgrinemaFarmWebsite() {
               <motion.div variants={cardVariants}>
                 <motion.div
                   whileHover={modernCardHover}
-                  className="relative group"
+                  className="relative group h-full"
                 >
-                  <Card className="border-2 border-blue-100 hover:border-blue-300 bg-gradient-to-br from-white via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-blue-950 dark:to-cyan-950 rounded-2xl overflow-hidden relative backdrop-blur-sm shadow-xl">
+                  <Card className="border-2 border-blue-100 hover:border-blue-300 bg-gradient-to-br from-white via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-blue-950 dark:to-cyan-950 rounded-xl sm:rounded-2xl overflow-hidden relative backdrop-blur-sm shadow-xl h-full">
                     <motion.div 
                       className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-600"
                       initial={{ scaleX: 0 }}
@@ -515,23 +528,23 @@ export default function AgrinemaFarmWebsite() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.9, duration: 1 }}
                     />
-                    <CardHeader className="text-center pb-2 relative">
+                    <CardHeader className="text-center pb-2 relative p-4 sm:p-6">
                       <motion.div
                         whileHover={{ rotate: 360, scale: 1.2 }}
                         transition={{ duration: 0.6 }}
                         className="inline-block"
                       >
-                        <Shield className="h-16 w-16 text-blue-600 mx-auto mb-4" />
+                        <Shield className="h-12 w-12 sm:h-16 sm:w-16 text-blue-600 mx-auto mb-3 sm:mb-4" />
                       </motion.div>
-                      <CardTitle className="text-foreground text-xl">Food Security</CardTitle>
+                      <CardTitle className="text-foreground text-lg sm:text-xl">Food Security</CardTitle>
                       <motion.div 
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-blue-400 rounded-full opacity-60"
+                        className="absolute -top-2 -right-2 w-4 h-4 sm:w-6 sm:h-6 bg-blue-400 rounded-full opacity-60"
                         animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0.2, 0.6] }}
                         transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                       />
                     </CardHeader>
-                    <CardContent className="relative">
-                      <p className="text-muted-foreground text-center leading-relaxed">
+                    <CardContent className="relative p-4 sm:p-6">
+                      <p className="text-muted-foreground text-center leading-relaxed text-sm sm:text-base">
                         Contributing to South Africa&apos;s food security through reliable, affordable, and accessible fresh
                         produce and protein sources.
                       </p>
@@ -885,6 +898,18 @@ export default function AgrinemaFarmWebsite() {
           </div>
         </div>
       </motion.section>
+
+      {/* Featured Products Section */}
+      {products.length > 0 && (
+        <ProductsListing 
+          products={products.filter(p => p.featured)} 
+          title="Featured Fresh Products"
+          subtitle="Hand-picked premium quality produce from our farm to your table"
+          showSearch={false}
+          showFilters={false}
+          gridCols="3"
+        />
+      )}
 
       {/* Blog Preview */}
       <section className="py-20 bg-muted/50">
