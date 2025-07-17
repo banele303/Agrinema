@@ -28,7 +28,7 @@ const DEFAULT_ORDERS_DATA: Order[] = [
       address: "Next to soccer ground",
       coordinates: { lat: -23.0865, lng: 29.4176 },
       
-      phone: "067 347 0687",
+      phone: "+27 67 347 0687",
       products: 15,
       isActive: true
     },
@@ -51,7 +51,7 @@ const DEFAULT_ORDERS_DATA: Order[] = [
       address: "Next to JP Tshikalange Primary School",
       coordinates: { lat: -23.1256, lng: 29.3847 },
      
-      phone: "068 801 1545",
+      phone: "+27 67 347 0687",
       products: 12,
       isActive: true
     },
@@ -67,8 +67,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Tshamutilikwa Farm",
     address: "Next to soccer ground",
     coordinates: { lat: -23.0865, lng: 29.4176 },
-   
-    phone: "067 347 0687",
+    phone: "+27 67 347 0687",
     products: 15,
     isActive: true
   },
@@ -77,8 +76,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Bunzhe Farm",
     address: "Next to JP Tshikalange Primary School",
     coordinates: { lat: -23.1256, lng: 29.3847 },
-    
-    phone: "068 801 1545",
+    phone: "+27 67 347 0687",
     products: 12,
     isActive: true
   },
@@ -87,8 +85,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Xigalo Farm",
     address: "Next to Cheapside and Balow Lodge",
     coordinates: { lat: -23.0945, lng: 29.4523 },
-   
-    phone: "067 347 0687",
+    phone: "+27 67 347 0687",
     products: 18,
     isActive: true
   },
@@ -97,8 +94,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Makasa Farm",
     address: "Makasa Village",
     coordinates: { lat: -23.1134, lng: 29.4098 },
-    
-    phone: "068 801 1545",
+    phone: "+27 67 347 0687",
     products: 14,
     isActive: true
   },
@@ -107,8 +103,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Tshivhulani Farm",
     address: "Next to Cabal Villa",
     coordinates: { lat: -23.0723, lng: 29.4312 },
-   
-    phone: "067 347 0687",
+    phone: "+27 67 347 0687",
     products: 16,
     isActive: true
   },
@@ -117,8 +112,7 @@ const DEFAULT_LOCATIONS_DATA: Location[] = [
     name: "Vhudimbilu Farm",
     address: "Vhudimbilu Village",
     coordinates: { lat: -23.1445, lng: 29.3765 },
-   
-    phone: "068 801 1545",
+    phone: "+27 67 347 0687",
     products: 13,
     isActive: true
   }

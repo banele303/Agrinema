@@ -42,16 +42,56 @@ const DEFAULT_LOCATIONS_DATA = [
     isActive: true,
     productAvailability: [
       {
-        name: "4 weeks old chickens (Live)",
-        status: "upcoming",
-        availableDate: "18th of July 2025",
-        category: "poultry"
+        name: "4 weeks Broiler Chicken (Live)",
+        status: "available",
+        availableDate: "Available Now",
+        category: "poultry",
+        details: {
+          production: "1000 weekly intake",
+          pricing: [
+            { range: "Regular price", price: "R70 each" },
+            { range: "100+ chickens", price: "R65 each" }
+          ],
+          description: "Live 4 weeks broiler chickens with volume pricing"
+        }
       },
       {
-        name: "Slaughtered Chickens",
-        status: "upcoming",
-        availableDate: "19th of July 2025",
-        category: "poultry"
+        name: "4 weeks Broiler Chicken (Slaughtered)",
+        status: "available",
+        availableDate: "Available Now",
+        category: "poultry",
+        details: {
+          production: "1000 weekly intake",
+          pricing: [
+            { range: "Without offals", price: "R60 each" },
+            { range: "100+ chickens", price: "R50 each" }
+          ],
+          description: "Slaughtered 4 weeks broiler chickens without offals"
+        }
+      },
+      {
+        name: "6 weeks Broiler Chicken (Live)",
+        status: "available",
+        availableDate: "Available Now",
+        category: "poultry",
+        details: {
+          pricing: [
+            { range: "Live chicken", price: "R110 each" }
+          ],
+          description: "6 weeks broiler chickens - live"
+        }
+      },
+      {
+        name: "6 weeks Broiler Chicken (Slaughtered)",
+        status: "available",
+        availableDate: "Available Now",
+        category: "poultry",
+        details: {
+          pricing: [
+            { range: "With offals", price: "R120 each" }
+          ],
+          description: "6 weeks broiler chickens slaughtered with offals"
+        }
       }
     ]
   },
@@ -159,10 +199,29 @@ const DEFAULT_LOCATIONS_DATA = [
         }
       },
       {
-        name: "Butternut",
+        name: "Ice Blocks",
+        status: "available",
+        availableDate: "Available Now",
+        category: "ice",
+        details: {
+          stock: "84 bags (4kg blocks)",
+          pricing: [
+            { range: "1-50 bags", price: "R20 each" },
+            { range: "50+ bags", price: "R15 each" }
+          ],
+          description: "4kg ice blocks with volume pricing"
+        }
+      },
+      {
+        name: "Butternut Squash",
         status: "upcoming",
-        availableDate: "14th of September 2025",
-        category: "vegetables"
+        availableDate: "15th of September 2025",
+        category: "vegetables",
+        details: {
+          area: "200m²",
+          plants: "1500 plants",
+          description: "Quality butternut squash"
+        }
       }
     ]
   },
