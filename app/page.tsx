@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Phone, Leaf, Users, Award, Apple, Egg, Snowflake, Shield, MessageCircle } from "lucide-react"
+import { Phone, Leaf, Users, Award, Apple, Egg, Snowflake, Shield, MessageCircle, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
@@ -156,7 +156,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              From farm to tables, committed to food security and community wellness. Producing premium fresh vegetables,
+              From our farm to your tables, committed to food security and community wellness. Producing premium fresh vegetables,
               quality poultry, and essential ice products for South African families and businesses.
             </motion.p>
             <motion.div 
@@ -279,7 +279,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                         whileHover={{ scale: 1.1, rotate: -5 }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
-                        8+
+                        10+
                       </motion.div>
                       <p className="text-muted-foreground font-medium">Vegetable Varieties</p>
                       <motion.div 
@@ -561,6 +561,204 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
           </div>
         </div>
       </section>
+
+      {/* Our Locations Section */}
+      <motion.section 
+        className="py-20 bg-background relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* Background decoration */}
+        <motion.div 
+          className="absolute inset-0 opacity-5"
+          animate={{ 
+            backgroundPosition: ["0% 0%", "100% 100%"],
+          }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
+          style={{
+            backgroundImage: "linear-gradient(45deg, #22c55e 25%, transparent 25%), linear-gradient(-45deg, #22c55e 25%, transparent 25%)",
+            backgroundSize: "60px 60px"
+          }}
+        />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Badge className="mb-4 bg-green-600 text-white">Our Farm Network</Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+                6 Strategic Locations Across Limpopo
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Strategically positioned farms ensuring fresh produce accessibility throughout Limpopo Province
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              {[
+                {
+                  name: "Tshamutilikwa Farm",
+                  location: "Next to soccer ground",
+                  manager: "Farm Manager",
+                  gradient: "from-green-500 to-emerald-600",
+                  bgGradient: "from-green-50 to-emerald-100",
+                  borderColor: "border-green-200 hover:border-green-400",
+                  icon: "🌱"
+                },
+                {
+                  name: "Bunzhe Farm",
+                  location: "Next to JP Tshikalange Primary School",
+                  manager: "Farm Manager",
+                  gradient: "from-emerald-500 to-teal-600",
+                  bgGradient: "from-emerald-50 to-teal-100",
+                  borderColor: "border-emerald-200 hover:border-emerald-400",
+                  icon: "🍅"
+                },
+                {
+                  name: "Xigalo Farm",
+                  location: "Next to Cheapside and Balow Lodge",
+                  manager: "Farm Manager",
+                  gradient: "from-teal-500 to-cyan-600",
+                  bgGradient: "from-teal-50 to-cyan-100",
+                  borderColor: "border-teal-200 hover:border-teal-400",
+                  icon: "🥬"
+                },
+                {
+                  name: "Makasa Farm",
+                  location: "Makasa Village",
+                  manager: "Farm Manager",
+                  gradient: "from-cyan-500 to-blue-600",
+                  bgGradient: "from-cyan-50 to-blue-100",
+                  borderColor: "border-cyan-200 hover:border-cyan-400",
+                  icon: "🧅"
+                },
+                {
+                  name: "Tshivhulani Farm",
+                  location: "Next to Cabal Villa",
+                  manager: "Farm Manager",
+                  gradient: "from-blue-500 to-indigo-600",
+                  bgGradient: "from-blue-50 to-indigo-100",
+                  borderColor: "border-blue-200 hover:border-blue-400",
+                  icon: "🌶️"
+                },
+                {
+                  name: "Vhudimbilu Farm",
+                  location: "Vhudimbilu Village",
+                  manager: "Farm Manager",
+                  gradient: "from-indigo-500 to-purple-600",
+                  bgGradient: "from-indigo-50 to-purple-100",
+                  borderColor: "border-indigo-200 hover:border-indigo-400",
+                  icon: "🥕"
+                }
+              ].map((farm, index) => (
+                <motion.div key={index} variants={cardVariants}>
+                  <motion.div
+                    whileHover={modernCardHover}
+                    className="relative group h-full"
+                  >
+                    <Card className={`border-2 ${farm.borderColor} bg-gradient-to-br from-white via-gray-50 ${farm.bgGradient} dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 rounded-3xl overflow-hidden relative backdrop-blur-sm shadow-xl h-full transition-all duration-500`}>
+                      <motion.div 
+                        className={`absolute top-0 left-0 w-full h-3 bg-gradient-to-r ${farm.gradient}`}
+                        initial={{ scaleX: 0, originX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + index * 0.1, duration: 1.2, ease: "easeOut" }}
+                      />
+                      <CardHeader className="p-8 relative">
+                        <motion.div 
+                          className="flex items-center gap-4 mb-4"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                        >
+                          <motion.div
+                            className="text-4xl"
+                            whileHover={{ scale: 1.2, rotate: 10 }}
+                            transition={{ type: "spring", stiffness: 400 }}
+                          >
+                            {farm.icon}
+                          </motion.div>
+                          <div>
+                            <CardTitle className="text-foreground text-xl font-bold">{farm.name}</CardTitle>
+                            <p className="text-muted-foreground text-sm">{farm.manager}</p>
+                          </div>
+                        </motion.div>
+                        <motion.div 
+                          className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
+                          whileHover={{ scale: 1.2, rotate: 180 }}
+                          transition={{ duration: 0.4 }}
+                        >
+                          <div className="w-full h-full rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
+                            <MapPin className="w-5 h-5 text-white" />
+                          </div>
+                        </motion.div>
+                      </CardHeader>
+                      <CardContent className="p-8 pt-0 relative">
+                        <motion.div 
+                          className="flex items-start gap-3 mb-4"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
+                        >
+                          <MapPin className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                          <p className="text-muted-foreground leading-relaxed">{farm.location}</p>
+                        </motion.div>
+                        <motion.div 
+                          className="flex items-center gap-2 text-sm text-green-600 font-medium"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                        >
+                          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                          <span>Active Production Site</span>
+                        </motion.div>
+                        <motion.div 
+                          className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-br from-gray-200/20 to-transparent rounded-full -mr-10 -mb-10"
+                          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+                          transition={{ duration: 8, repeat: Infinity, delay: index * 1.5 }}
+                        />
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div 
+              className="text-center mt-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link href="/contact">
+                  <Button size="lg" className="bg-green-600 hover:bg-green-700">
+                    <MapPin className="h-5 w-5 mr-2" />
+                    Visit Our Farms
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Products Preview */}
       <motion.section 
