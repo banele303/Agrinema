@@ -612,7 +612,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 {
                   name: "Tshamutilikwa Farm",
                   location: "Next to soccer ground",
-                  manager: "Farm Manager",
                   gradient: "from-green-500 to-emerald-600",
                   bgGradient: "from-green-50 to-emerald-100",
                   borderColor: "border-green-200 hover:border-green-400",
@@ -621,7 +620,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 {
                   name: "Bunzhe Farm",
                   location: "Next to JP Tshikalange Primary School",
-                  manager: "Farm Manager",
                   gradient: "from-emerald-500 to-teal-600",
                   bgGradient: "from-emerald-50 to-teal-100",
                   borderColor: "border-emerald-200 hover:border-emerald-400",
@@ -630,7 +628,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 {
                   name: "Xigalo Farm",
                   location: "Next to Cheapside and Balow Lodge",
-                  manager: "Farm Manager",
                   gradient: "from-teal-500 to-cyan-600",
                   bgGradient: "from-teal-50 to-cyan-100",
                   borderColor: "border-teal-200 hover:border-teal-400",
@@ -639,7 +636,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 {
                   name: "Makasa Farm",
                   location: "Makasa Village",
-                  manager: "Farm Manager",
                   gradient: "from-cyan-500 to-blue-600",
                   bgGradient: "from-cyan-50 to-blue-100",
                   borderColor: "border-cyan-200 hover:border-cyan-400",
@@ -648,7 +644,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 {
                   name: "Tshivhulani Farm",
                   location: "Next to Cabal Villa",
-                  manager: "Farm Manager",
                   gradient: "from-blue-500 to-indigo-600",
                   bgGradient: "from-blue-50 to-indigo-100",
                   borderColor: "border-blue-200 hover:border-blue-400",
@@ -657,7 +652,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                 {
                   name: "Vhudimbilu Farm",
                   location: "Vhudimbilu Village",
-                  manager: "Farm Manager",
                   gradient: "from-indigo-500 to-purple-600",
                   bgGradient: "from-indigo-50 to-purple-100",
                   borderColor: "border-indigo-200 hover:border-indigo-400",
@@ -694,7 +688,6 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                           </motion.div>
                           <div>
                             <CardTitle className="text-foreground text-xl font-bold">{farm.name}</CardTitle>
-                            <p className="text-muted-foreground text-sm">{farm.manager}</p>
                           </div>
                         </motion.div>
                         <motion.div 

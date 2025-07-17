@@ -9,6 +9,7 @@ import { MapPin, Phone, User, Package, Navigation, Clock, Tractor, Users, Calend
 import { Location } from "@/types/product"
 import Link from "next/link"
 import Image from "next/image"
+import { Navbar } from "@/components/navbar"
 
 // Modern animation variants matching homepage
 const cardVariants = {
@@ -113,6 +114,9 @@ export default function LocationsPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {/* Navigation */}
+      <Navbar />
+      
       {/* Hero Section */}
       <motion.section 
         className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-green-950 to-emerald-950 pt-20"
@@ -316,16 +320,16 @@ export default function LocationsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 px-2 sm:px-0">
               Visit Our <span className="text-green-600">Farm Locations</span>
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-4 sm:px-0">
               Each of our farms is uniquely positioned to serve different communities while maintaining 
               our commitment to sustainable agriculture and quality produce.
             </p>
@@ -333,7 +337,7 @@ export default function LocationsPage() {
 
           {/* Locations Cards Grid */}
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -346,9 +350,9 @@ export default function LocationsPage() {
                 whileHover={modernCardHover}
                 className="group"
               >
-                <Card className="h-full border-0 shadow-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-md hover:shadow-2xl transition-all duration-300 rounded-2xl overflow-hidden">
+                <Card className="h-full border-0 shadow-lg sm:shadow-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md hover:shadow-2xl transition-all duration-300 rounded-xl sm:rounded-2xl overflow-hidden mx-2 sm:mx-0">
                   {/* Card Header with Farm Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-40 sm:h-48 overflow-hidden">
                     <Image
                       src={`/plant${(index % 9) + 1}.jpeg`}
                       alt={`${location.name} - Agrinema Farm Location`}
@@ -374,13 +378,13 @@ export default function LocationsPage() {
                     </div>
                   </div>
 
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                  <CardHeader className="pb-3 sm:pb-4 px-4 sm:px-6">
+                    <CardTitle className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                       {location.name}
                     </CardTitle>
                   </CardHeader>
 
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6 pb-4 sm:pb-6">
                     {/* Location Details */}
                     <div className="space-y-4">
                       <div className="flex items-start space-x-3">
@@ -388,14 +392,6 @@ export default function LocationsPage() {
                         <div>
                           <p className="text-sm font-medium text-gray-900 dark:text-white">Address</p>
                           <p className="text-sm text-gray-600 dark:text-gray-400">{location.address}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center space-x-3">
-                        <User className="h-5 w-5 text-gray-400 dark:text-gray-500 flex-shrink-0" />
-                        <div>
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">Farm Manager</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{location.manager}</p>
                         </div>
                       </div>
 
@@ -428,9 +424,9 @@ export default function LocationsPage() {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex space-x-2 pt-2">
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 pt-2">
                       <Link href={`/locations/${location.id}`} className="flex-1">
-                        <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 transition-all duration-300">
+                        <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 transition-all duration-300 py-2 sm:py-2.5">
                           View Details
                         </Button>
                       </Link>
@@ -441,9 +437,10 @@ export default function LocationsPage() {
                           const mapsUrl = `https://www.google.com/maps?q=${location.coordinates?.lat || 0},${location.coordinates?.lng || 0}`
                           window.open(mapsUrl, '_blank')
                         }}
-                        className="border-gray-200 dark:border-gray-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+                        className="border-gray-200 dark:border-gray-600 hover:bg-green-50 dark:hover:bg-green-900/20 w-full sm:w-auto"
                       >
-                        <Navigation className="h-4 w-4" />
+                        <Navigation className="h-4 w-4 mr-2 sm:mr-0" />
+                        <span className="sm:hidden">Open in Maps</span>
                       </Button>
                     </div>
                   </CardContent>
