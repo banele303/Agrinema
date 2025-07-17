@@ -29,7 +29,7 @@ export function FloatingActions() {
       >
         <Button
           onClick={handleWhatsApp}
-          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg hover:shadow-xl transition-all duration-300 group p-0"
+          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group p-0"
           size="icon"
         >
           <Image
