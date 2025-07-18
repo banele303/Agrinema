@@ -41,7 +41,7 @@ export default function VegetablesPage() {
     },
     {
       name: "Butternut Squash",
-      image: "/products/Potatoes.jpeg",
+      image: "/bb2.jpg",
       description: "Sweet and nutty squash rich in vitamins and perfect for various dishes.",
       season: "Fall/Winter",
       benefits: ["High in Vitamin A", "Rich in Potassium", "Good Fiber Source", "Low in Calories"]
