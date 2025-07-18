@@ -53,7 +53,7 @@ const sampleProducts: Product[] = [
     title: "Broiler Chickens",
     price: "R180 per kg",
     availability: "Limited Stock",
-    image: "IMG_6097.jpg",
+    image: "chicken.jpeg",
     featured: false,
     category: "poultry",
     content: "Premium quality broiler chickens raised with care."

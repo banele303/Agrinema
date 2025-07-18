@@ -29,15 +29,16 @@ export function FloatingActions() {
       >
         <Button
           onClick={handleWhatsApp}
-          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group p-0"
+          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg hover:shadow-xl transition-all duration-300 group p-0 flex items-center justify-center"
           size="icon"
         >
           <Image
             src="/icons8-whatsapp-50.png"
             alt="WhatsApp"
-            width={24}
-            height={24}
-            className="w-5 h-5 sm:w-6 sm:h-6 object-contain filter bg-blue px-4 rounded-full invert group-hover:scale-110 transition-transform duration-200"
+            width={20}
+            height={20}
+            className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform duration-200"
+            priority
           />
           <span className="sr-only">WhatsApp</span>
         </Button>

@@ -88,7 +88,7 @@ export default function AboutPage() {
               </div>
               <div className="space-y-6">
                 <Image
-                  src="/poultry1.jpg"
+                  src="/chicken2.jpeg"
                   alt="Agrinema Farm modern agricultural facilities and sustainable farming practices"
                   width={600}
                   height={400}

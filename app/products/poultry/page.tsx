@@ -27,7 +27,7 @@ export default function PoultryPage() {
     },
     {
       name: "Organic Chicken Feed",
-      image: "/IMG_6097.jpg",
+      image: "/chicken.jpeg",
       description: "Premium organic feed formulated for optimal poultry health and nutrition.",
       availability: "Year-round",
       benefits: ["Organic ingredients", "Balanced nutrition", "Growth support", "Health promoting"]
@@ -234,7 +234,7 @@ export default function PoultryPage() {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="relative h-80">
                     <Image
-                      src="/IMG_6097.jpg"
+                      src="/chicken.jpeg"
                       alt="Natural feeding"
                       fill
                       className="object-cover rounded-lg"

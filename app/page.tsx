@@ -428,11 +428,11 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
               <div className="order-2 lg:order-1">
                 <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                   <Image
-                    src="/newbb.jpeg"
+                    src="/chicken.jpeg"
                     alt="Agrinema Farm sustainable agriculture practices in Limpopo"
                     width={500}
                     height={300}
-                    className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover"
+                    className="w-full h-[346px] md:h-[389px] lg:h-[389px] object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 500px"
                     priority
                   />
@@ -1029,7 +1029,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     >
                       <Image
-                        src="/IMG_6097.jpg"
+                        src="/chicken.jpeg"
                         alt="Premium Poultry"
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
