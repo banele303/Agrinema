@@ -27,7 +27,7 @@ export default function PoultryPage() {
     },
     {
       name: "Organic Chicken Feed",
-      image: "/chicken.jpeg",
+      image: "/products/organic-food.jpeg",
       description: "Premium organic feed formulated for optimal poultry health and nutrition.",
       availability: "Year-round",
       benefits: ["Organic ingredients", "Balanced nutrition", "Growth support", "Health promoting"]
