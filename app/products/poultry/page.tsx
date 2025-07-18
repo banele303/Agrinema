@@ -12,14 +12,14 @@ import { Navbar } from "@/components/navbar"
 export default function PoultryPage() {
   const poultryProducts = [
     {
-      name: "Free-Range Chickens",
-      image: "/pp2.jpg",
+      name: "Chickens",
+      image: "/products/chicken3.jpeg",
       description: "Happy, healthy chickens raised in spacious outdoor environments with natural feeding.",
-      availability: "Year-round",
+      availability: "Year-round , Here also Write Capacity of 1000 Per Week & 4000 Per Month",
       benefits: ["High-quality protein", "Natural feeding", "Stress-free environment", "Better taste"]
     },
     {
-      name: "Farm Fresh Eggs",
+      name: "Farm Fresh Eggs Coming Soon",
       image: "/poultry1.jpg",
       description: "Daily fresh eggs from our free-range hens, rich in nutrients and flavor.",
       availability: "Daily",
@@ -65,7 +65,7 @@ export default function PoultryPage() {
       <section className="relative min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center bg-gradient-to-br from-amber-950 to-orange-950 pt-20">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/fresh1.jpeg"
+            src="/products/chicken3.jpeg"
             alt="Free-range Poultry at Agrinema Farm"
             fill
             className="object-cover opacity-30"
@@ -234,7 +234,7 @@ export default function PoultryPage() {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="relative h-80">
                     <Image
-                      src="/chicken.jpeg"
+                      src="/products/chicken3.jpeg"
                       alt="Natural feeding"
                       fill
                       className="object-cover rounded-lg"
@@ -300,7 +300,7 @@ export default function PoultryPage() {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="relative h-80">
                     <Image
-                      src="/poultry1.jpg"
+                      src="/products/chicken3.jpeg"
                       alt="Processing facilities"
                       fill
                       className="object-cover rounded-lg"

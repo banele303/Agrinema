@@ -13,42 +13,42 @@ export default function VegetablesPage() {
   const vegetables = [
     {
       name: "Fresh Tomatoes",
-      image: "/tomato5.jpg",
+      image: "/products/new-tomato.jpeg",
       description: "Juicy, ripe tomatoes grown in optimal conditions for maximum flavor and nutrition.",
       season: "Year-round",
       benefits: ["Rich in Vitamin C", "High in Lycopene", "Low in Calories", "Heart Healthy"]
     },
     {
       name: "Premium Onions",
-      image: "/onion4.jpg",
+      image: "/products/onion-new.jpeg",
       description: "Sweet and crisp onions perfect for cooking and fresh consumption.",
       season: "Year-round",
       benefits: ["Rich in Antioxidants", "Anti-inflammatory", "Good for Heart Health", "Immune Support"]
     },
     {
       name: "Fresh Spinach",
-      image: "/spinash.jpg",
+      image: "/products/new-spinash.jpeg",
       description: "Nutrient-dense leafy greens packed with vitamins and minerals.",
       season: "Cool season",
       benefits: ["High in Iron", "Rich in Folate", "Vitamin K", "Antioxidant Properties"]
     },
     {
-      name: "Green Peppers",
-      image: "/greanpaper.jpeg",
-      description: "Crisp and colorful peppers perfect for salads and cooking.",
+      name: "Fresh Okra",
+      image: "/products/Okra.jpeg",
+      description: "Fresh okra perfect for traditional dishes and healthy cooking.",
       season: "Summer",
-      benefits: ["High Vitamin C", "Low Calories", "Rich in Fiber", "Antioxidants"]
+      benefits: ["High Vitamin C", "Rich in Fiber", "Low Calories", "Antioxidants"]
     },
     {
       name: "Butternut Squash",
-      image: "/better.jpg",
+      image: "/products/Potatoes.jpeg",
       description: "Sweet and nutty squash rich in vitamins and perfect for various dishes.",
       season: "Fall/Winter",
       benefits: ["High in Vitamin A", "Rich in Potassium", "Good Fiber Source", "Low in Calories"]
     },
     {
       name: "Fresh Potatoes",
-      image: "/gwili.jpg",
+      image: "/products/Potatoes.jpeg",
       description: "Versatile and nutritious potatoes grown in our fertile Limpopo soil.",
       season: "Year-round",
       benefits: ["Good Carb Source", "Rich in Potassium", "Vitamin C", "Dietary Fiber"]
@@ -63,7 +63,7 @@ export default function VegetablesPage() {
       <section className="relative min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center bg-gradient-to-br from-green-950 to-emerald-950 pt-20">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/vegetable.jpeg"
+            src="/products/new-tomato.jpeg"
             alt="Fresh Vegetables from Agrinema Farm"
             fill
             className="object-cover opacity-30"
@@ -238,7 +238,7 @@ export default function VegetablesPage() {
                   </div>
                   <div className="relative h-80">
                     <Image
-                      src="/plant5.jpeg"
+                      src="/products/chicken3.jpeg"
                       alt="Planting process"
                       fill
                       className="object-cover rounded-lg"
@@ -251,7 +251,7 @@ export default function VegetablesPage() {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="relative h-80">
                     <Image
-                      src="/plant6.jpeg"
+                      src="/products/new-tomato.jpeg"
                       alt="Growing process"
                       fill
                       className="object-cover rounded-lg"
@@ -304,7 +304,7 @@ export default function VegetablesPage() {
                   </div>
                   <div className="relative h-80">
                     <Image
-                      src="/plant7.jpeg"
+                      src="/products/Okra.jpeg"
                       alt="Harvesting process"
                       fill
                       className="object-cover rounded-lg"
@@ -317,7 +317,7 @@ export default function VegetablesPage() {
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="relative h-80">
                     <Image
-                      src="/spinash2.jpg"
+                      src="/products/new-spinash.jpeg"
                       alt="Packaging process"
                       fill
                       className="object-cover rounded-lg"

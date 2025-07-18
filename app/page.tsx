@@ -162,7 +162,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
           transition={{ duration: 1.5 }}
         >
           <Image
-            src="/vegetable.jpeg"
+            src="/products/new-tomato.jpeg"
             alt="Agrinema Farm - Fresh vegetables and sustainable farming in Limpopo, South Africa"
             fill
             className="object-cover opacity-30 dark:opacity-20"
@@ -935,7 +935,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     >
                       <Image
-                        src="/tomato7.jpg"
+                        src="/products/new-tomato.jpeg"
                         alt="Fresh Vegetables"
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
@@ -1029,7 +1029,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     >
                       <Image
-                        src="/chicken.jpeg"
+                        src="/products/chicken3.jpeg"
                         alt="Premium Poultry"
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
@@ -1123,7 +1123,7 @@ export default function AgrinemaFarmWebsite({ products = [] }: { products?: Prod
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     >
                       <Image
-                        src="/iceblook.jpg"
+                        src="/products/Ice Cubes.jpeg"
                         alt="Ice Products"
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"

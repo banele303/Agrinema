@@ -127,7 +127,7 @@ export default function LocationsPage() {
           transition={{ duration: 1.5 }}
         >
           <Image
-            src="/trector.jpeg"
+            src="/products/chicken3.jpeg"
             alt="Agrinema Farm Equipment - Our farming operations across Limpopo"
             fill
             className="object-cover opacity-30 dark:opacity-20"
@@ -340,12 +340,15 @@ export default function LocationsPage() {
                   {/* Card Header with Farm Image */}
                   <div className="relative h-40 sm:h-48 overflow-hidden">
                     <Image
-                      src={`/plant${(index % 9) + 1}.jpeg`}
+                      src={`/products/${location.id === 'bunzhe' ? 'Bunzhe.jpeg' : 
+                                     location.id === 'tshivhulani' ? 'Tshivhulani.jpeg' : 
+                                     location.id === 'tshamutilikwa' ? 'Tshamutilikwa.jpeg' : 
+                                     `plant${(index % 9) + 1}.jpeg`}`}
                       alt={`${location.name} - Agrinema Farm Location`}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                       onError={(e) => {
-                        e.currentTarget.src = '/vegetable.jpeg'
+                        e.currentTarget.src = '/products/new-tomato.jpeg'
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -560,7 +563,7 @@ export default function LocationsPage() {
           transition={{ duration: 1.5 }}
         >
           <Image
-            src="/plant5.jpeg"
+            src="/products/chicken3.jpeg"
             alt="Fresh vegetables from Agrinema Farm"
             fill
             className="object-cover opacity-20"

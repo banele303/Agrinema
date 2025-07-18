@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Phone, CheckCircle, Snowflake, Truck, Factory, Thermometer, Package, Clock, MessageCircle } from "lucide-react"
+import { Progress } from "@/components/ui/progress"
+import { CheckCircle, Snowflake, Truck, Factory, Thermometer, Package, Clock, MessageCircle, Phone } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
@@ -20,25 +21,11 @@ export default function IcePage() {
     },
     {
       name: "Cube Ice",
-      image: "/iceblook.jpg",
+      image: "/products/Ice Cubes.jpeg",
       description: "Crystal clear cube ice ideal for beverages, restaurants, and retail establishments.",
       sizes: ["5kg", "10kg", "20kg"],
       applications: ["Restaurants", "Bars", "Retail stores", "Events"]
     },
-    {
-      name: "Crushed Ice",
-      image: "/icebloock2.jpg",
-      description: "Fine crushed ice perfect for displays, food presentation, and quick cooling applications.",
-      sizes: ["2kg", "5kg", "10kg"],
-      applications: ["Food displays", "Seafood markets", "Medical cooling", "Sports events"]
-    },
-    {
-      name: "Dry Ice",
-      image: "/iceblock3.jpg",
-      description: "Specialized dry ice for shipping, industrial cooling, and special effects applications.",
-      sizes: ["1kg", "5kg", "10kg"],
-      applications: ["Shipping frozen goods", "Industrial processes", "Special effects", "Emergency cooling"]
-    }
   ]
 
   const qualityFeatures = [
@@ -72,7 +59,7 @@ export default function IcePage() {
       <section className="relative min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center bg-gradient-to-br from-blue-950 to-cyan-950 pt-20">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/placeholder.jpg"
+            src="/products/Ice Cubes.jpeg"
             alt="Ice Production at Agrinema Farm"
             fill
             className="object-cover opacity-30"
@@ -235,7 +222,7 @@ export default function IcePage() {
                   </div>
                   <div className="relative h-80">
                     <Image
-                      src="/iceblook.jpg"
+                      src="/products/Ice Cubes.jpeg"
                       alt="Water treatment process"
                       fill
                       className="object-cover rounded-lg"
@@ -301,7 +288,7 @@ export default function IcePage() {
                   </div>
                   <div className="relative h-80">
                     <Image
-                      src="/iceblook.jpg"
+                      src="/products/Ice Cubes.jpeg"
                       alt="Packaging process"
                       fill
                       className="object-cover rounded-lg"
