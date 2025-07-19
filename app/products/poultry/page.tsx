@@ -14,8 +14,8 @@ export default function PoultryPage() {
     {
       name: "Chickens",
       image: "/products/chicken3.jpeg",
-      description: "Happy, healthy chickens raised in spacious outdoor environments with natural feeding.",
-      availability: "Year-round , Here also Write Capacity of 1000 Per Week & 4000 Per Month",
+      description: "Capacity of 1000 Per Week & 4000 Per Month",
+      availability: "Year-round",
       benefits: ["High-quality protein", "Natural feeding", "Stress-free environment", "Better taste"]
     },
     {
